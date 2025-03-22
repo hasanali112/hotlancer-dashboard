@@ -1,10 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import PageNav from "@/component/Layout/PageNav";
+import Banner from "@/component/Layout/Banner"; // Import the Banner component
 import { useAppDispatch } from "@/redux/hook";
 import { setComponent } from "@/redux/features/layoutSlice";
 
 const Home = () => {
+  // Navbar State
   const [showNavbar, setShowNavbar] = useState(true);
   const [navbarColor, setNavbarColor] = useState("#ffffff");
   const [navbarTextColor, setNavbarTextColor] = useState("#333333");
@@ -22,6 +24,17 @@ const Home = () => {
       { label: "Contact", url: "/contact" },
     ],
   });
+
+  // Banner State
+  const [showBanner, setShowBanner] = useState(true);
+  const [bannerHeading, setBannerHeading] = useState("Welcome to My Site");
+  const [bannerContent, setBannerContent] = useState(
+    "This is a sample banner content."
+  );
+  const [showBannerImage, setShowBannerImage] = useState(false);
+  const [bannerImageUrl, setBannerImageUrl] = useState("");
+  const [bannerBackgroundColor, setBannerBackgroundColor] = useState("#f0f4f8");
+  const [bannerTextColor, setBannerTextColor] = useState("#333333");
 
   const dispatch = useAppDispatch();
 
@@ -43,6 +56,22 @@ const Home = () => {
 
     if (showNavbar) {
       dispatch(setComponent(navbarData));
+    }
+  };
+
+  const handleSaveBanner = () => {
+    const bannerData = {
+      showBanner,
+      heading: bannerHeading,
+      content: bannerContent,
+      showImage: showBannerImage,
+      imageUrl: bannerImageUrl,
+      backgroundColor: bannerBackgroundColor,
+      textColor: bannerTextColor,
+    };
+
+    if (showBanner) {
+      dispatch(setComponent({ banner: bannerData }));
     }
   };
 
@@ -73,7 +102,7 @@ const Home = () => {
         </p>
         <hr className="my-6 border-gray-200" />
 
-        {/* Configuration Panel */}
+        {/* Navbar Configuration Panel */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-xl font-semibold mb-4 text-gray-700">
             Navigation Settings
@@ -97,7 +126,7 @@ const Home = () => {
               <div>
                 <button
                   onClick={handleSaveNav}
-                  className="ml-auto px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 cursor-pointer "
+                  className="ml-auto px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 cursor-pointer"
                 >
                   Save in Layout
                 </button>
@@ -105,9 +134,10 @@ const Home = () => {
             )}
           </div>
 
-          {/* Color and Style Selection */}
+          {/* Navbar Color and Style Selection */}
           {showNavbar && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Navbar Brand and Style */}
               <div className="space-y-4">
                 <div className="flex flex-col space-y-2">
                   <label className="font-medium text-gray-700">
@@ -137,6 +167,7 @@ const Home = () => {
                 </div>
               </div>
 
+              {/* Navbar Colors */}
               <div className="space-y-4">
                 <div className="flex flex-col space-y-2">
                   <label className="font-medium text-gray-700">
@@ -174,6 +205,133 @@ const Home = () => {
           )}
         </div>
 
+        {/* Banner Configuration Panel */}
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 className="text-xl font-semibold mb-4 text-gray-700">
+            Banner Settings
+          </h2>
+
+          {/* Banner Toggle */}
+          <div className="flex items-center mb-6 pb-4 border-b border-gray-100 gap-4">
+            <div>
+              <input
+                id="banner"
+                type="checkbox"
+                className="form-checkbox h-5 w-5 text-blue-600 mr-3"
+                checked={showBanner}
+                onChange={() => setShowBanner(!showBanner)}
+              />
+              <label htmlFor="banner" className="font-medium cursor-pointer">
+                Show Banner Component
+              </label>
+            </div>
+            {showBanner && (
+              <div>
+                <button
+                  onClick={handleSaveBanner}
+                  className="ml-auto px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 cursor-pointer"
+                >
+                  Save in Layout
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Banner Content and Style Selection */}
+          {showBanner && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Banner Content */}
+              <div className="space-y-4">
+                <div className="flex flex-col space-y-2">
+                  <label className="font-medium text-gray-700">
+                    Banner Heading:
+                  </label>
+                  <input
+                    type="text"
+                    className="px-3 py-2 border border-gray-300 rounded-md"
+                    value={bannerHeading}
+                    onChange={(e) => setBannerHeading(e.target.value)}
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-2">
+                  <label className="font-medium text-gray-700">
+                    Banner Content:
+                  </label>
+                  <textarea
+                    className="px-3 py-2 border border-gray-300 rounded-md"
+                    value={bannerContent}
+                    onChange={(e) => setBannerContent(e.target.value)}
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-2">
+                  <label className="font-medium text-gray-700">
+                    Show Banner Image:
+                  </label>
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-5 w-5 text-blue-600"
+                    checked={showBannerImage}
+                    onChange={() => setShowBannerImage(!showBannerImage)}
+                  />
+                </div>
+
+                {showBannerImage && (
+                  <div className="flex flex-col space-y-2">
+                    <label className="font-medium text-gray-700">
+                      Banner Image URL:
+                    </label>
+                    <input
+                      type="text"
+                      className="px-3 py-2 border border-gray-300 rounded-md"
+                      value={bannerImageUrl}
+                      onChange={(e) => setBannerImageUrl(e.target.value)}
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Banner Colors */}
+              <div className="space-y-4">
+                <div className="flex flex-col space-y-2">
+                  <label className="font-medium text-gray-700">
+                    Background Color:
+                  </label>
+                  <div className="flex items-center">
+                    <input
+                      type="color"
+                      className="w-10 h-10 rounded cursor-pointer border border-gray-200"
+                      value={bannerBackgroundColor}
+                      onChange={(e) => setBannerBackgroundColor(e.target.value)}
+                    />
+                    <span className="ml-3 text-gray-500">
+                      {bannerBackgroundColor}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col space-y-2">
+                  <label className="font-medium text-gray-700">
+                    Text Color:
+                  </label>
+                  <div className="flex items-center">
+                    <input
+                      type="color"
+                      className="w-10 h-10 rounded cursor-pointer border border-gray-200"
+                      value={bannerTextColor}
+                      onChange={(e) => setBannerTextColor(e.target.value)}
+                    />
+                    <span className="ml-3 text-gray-500">
+                      {bannerTextColor}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Preview Section */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4 text-gray-700">Preview</h2>
@@ -186,6 +344,17 @@ const Home = () => {
                 brandText={brandText}
                 navConfig={navConfig}
                 setNavConfig={setNavConfig}
+              />
+            )}
+            {showBanner && (
+              <Banner
+                showBanner={showBanner}
+                heading={bannerHeading}
+                content={bannerContent}
+                showImage={showBannerImage}
+                imageUrl={bannerImageUrl}
+                backgroundColor={bannerBackgroundColor}
+                textColor={bannerTextColor}
               />
             )}
             <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
