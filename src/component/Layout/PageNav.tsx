@@ -25,23 +25,6 @@ const PageNav = ({ bgColor = "#ffffff", textColor = "#333333", style = "default"
   
   
   // Handle saving the updated configuration
-  const saveConfig = async () => {
-    try {
-      const response = await fetch('/api/save-nav-config', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(navConfig),
-      });
-      
-      if (response.ok) {
-        alert('Navigation configuration saved successfully!');
-      } else {
-        alert('Failed to save configuration.');
-      }
-    } catch (error) {
-      console.error('Error saving configuration:', error);
-    }
-  };
 
   // Determine padding based on style
   const getPadding = () => {
