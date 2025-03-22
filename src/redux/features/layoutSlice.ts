@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  layoutJson: [] as any,
+  navComponent: {},
 };
 
 const layoutSlice = createSlice({
@@ -10,10 +10,13 @@ const layoutSlice = createSlice({
   initialState: initialState,
   reducers: {
     setComponent: (state, action) => {
-      state.layoutJson.push(action.payload);
+      state.navComponent = action.payload;
+    },
+    resetNavbar: (state) => {
+      state.navComponent = {};
     },
   },
 });
 
-export const { setComponent } = layoutSlice.actions;
+export const { setComponent, resetNavbar } = layoutSlice.actions;
 export default layoutSlice.reducer;
