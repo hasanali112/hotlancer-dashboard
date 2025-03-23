@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { setComponent } from "@/redux/features/layoutSlice";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -11,6 +12,7 @@ const PageNav = () => {
   const [flexDirection, setFlexDirection] = useState("flex");
   const [justifyContent, setJustifyContent] = useState("justify-between");
   const [alignItems, setAlignItems] = useState("items-center");
+  const [gap, setGap] = useState("gap-4");
 
   // Navbar configuration
   const [navConfig, setNavConfig] = useState({
@@ -38,14 +40,6 @@ const PageNav = () => {
     }));
   };
 
-  // Add new navigation item
-  const addNavItem = (label: string, url: string) => {
-    setNavConfig((prevConfig) => ({
-      ...prevConfig,
-      items: [...prevConfig.items, { label, url }],
-    }));
-  };
-
   // Handle style change
   const handleStyleChange = (value: string) => {
     setNavbarStyle({ value });
@@ -57,17 +51,18 @@ const PageNav = () => {
       flexDirection,
       justifyContent,
       alignItems,
+      gap,
     };
     const config = {
       brand: brandText,
       items: navConfig.items,
-      styles: navbarStyles,
+      navStyles: navbarStyles,
       colors: {
         backgroundColor: navbarColor,
         textColor: navbarTextColor,
       },
     };
-    // dispatch(setNavbarConfig(config)); // Save to Redux store
+    dispatch(setComponent(config));
     console.log("Navbar configuration saved to Redux store:", config);
   };
 
@@ -200,6 +195,15 @@ const PageNav = () => {
                 onChange={(e) => setAlignItems(e.target.value)}
               />
             </div>
+            <div className="flex flex-col space-y-2">
+              <label className="font-medium text-gray-700">Gap:</label>
+              <input
+                type="text"
+                className="px-3 py-2 border border-gray-300 rounded-md"
+                value={gap}
+                onChange={(e) => setGap(e.target.value)}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -210,7 +214,7 @@ const PageNav = () => {
       <div className="my-5 bg-white rounded shadow-lg border border-gray-400 border-dashed p-1">
         <h1 className="mb-2 text-2xl font-semibold">Navbar Preview</h1>
         <nav
-          className={`w-full px-6 ${flexDirection} ${justifyContent} ${alignItems} ${getPadding()} mb-6 rounded`}
+          className={`w-full px-6 ${gap}  ${flexDirection} ${justifyContent} ${alignItems} ${getPadding()} mb-6 rounded`}
           style={{ backgroundColor: navbarColor, color: navbarTextColor }}
         >
           <div className="font-bold text-xl">{navConfig.brand}</div>
