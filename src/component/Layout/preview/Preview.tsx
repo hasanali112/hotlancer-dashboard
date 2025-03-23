@@ -1,11 +1,51 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+
+import { useAppSelector } from "@/redux/hook";
 import React from "react";
 
 const Preview = () => {
+  const { navComponent } = useAppSelector((state) => state.layout as any);
+
+  console.log(navComponent);
+
   return (
     <div className="shadow-lg shadow-blue-200 rounded-lg w-full">
       <div className="bg-white p-6 mb-6">
         <h2 className="text-xl font-semibold mb-4 text-gray-700">Preview</h2>
-        <div className="border border-gray-200 rounded-md overflow-hidden">
+        <div className="border border-gray-200 rounded-md">
+          <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
+            {/* Navbar */}
+            {navComponent ? (
+              <nav
+                style={{
+                  backgroundColor: navComponent.colors?.backgroundColor,
+                  color: navComponent.colors?.textColor,
+                }}
+                className={`flex w-full ${navComponent.navStyles?.flexDirection} ${navComponent.navStyles?.justifyContent} ${navComponent.navStyles?.alignItems} ${navComponent.navStyles?.gap} p-4 rounded-md`}
+              >
+                <div className="text-lg font-semibold">
+                  {navComponent.brand}
+                </div>
+                <ul className={`flex ${navComponent.navStyles?.gap}`}>
+                  {navComponent.items?.map((item: any, index: any) => (
+                    <li key={index}>
+                      <a
+                        href={item.url}
+                        className="hover:text-blue-600 transition duration-200"
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ) : (
+              <p className="text-gray-500">
+                No navbar configuration available.
+              </p>
+            )}
+          </div>
           <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
             <h1 className="text-2xl font-semibold text-gray-700">
               Page Content Area
