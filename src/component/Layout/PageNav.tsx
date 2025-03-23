@@ -1,36 +1,79 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { useEffect } from "react";
 
-const PageNav = ({
-  bgColor = "#ffffff",
-  textColor = "#333333",
-  style = "default",
-  brandText,
-  navConfig,
-  setNavConfig,
-}: {
-  bgColor?: string;
-  textColor?: string;
-  style?: string;
-  brandText?: string;
-  navConfig: {
-    brand: string;
-    items: { label: string; url: string }[];
+import { Button } from "@/components/ui/button";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
+const PageNav = () => {
+  const dispatch = useDispatch();
+
+  // Local state for input fields
+  const [flexDirection, setFlexDirection] = useState("flex");
+  const [justifyContent, setJustifyContent] = useState("justify-between");
+  const [alignItems, setAlignItems] = useState("items-center");
+
+  // Navbar configuration
+  const [navConfig, setNavConfig] = useState({
+    brand: "Brand Name",
+    items: [
+      { label: "Home", url: "/" },
+      { label: "About", url: "/about" },
+      { label: "Services", url: "/services" },
+      { label: "Contact", url: "/contact" },
+    ],
+  });
+
+  // Navbar styling
+  const [brandText, setBrandText] = useState(navConfig.brand);
+  const [navbarStyle, setNavbarStyle] = useState({ value: "default" });
+  const [navbarColor, setNavbarColor] = useState("#e2dfdf");
+  const [navbarTextColor, setNavbarTextColor] = useState("#333333");
+
+  // Update brand in nav config when brandText changes
+  const updateBrand = (newBrand: string) => {
+    setBrandText(newBrand);
+    setNavConfig((prevConfig) => ({
+      ...prevConfig,
+      brand: newBrand,
+    }));
   };
-  setNavConfig: (config: any) => void;
-}) => {
-  useEffect(() => {
-    if (setNavConfig) {
-      setNavConfig((prevConfig: any) => ({
-        ...prevConfig,
-        brand: brandText,
-      }));
-    }
-  }, [brandText, setNavConfig]);
 
+  // Add new navigation item
+  const addNavItem = (label: string, url: string) => {
+    setNavConfig((prevConfig) => ({
+      ...prevConfig,
+      items: [...prevConfig.items, { label, url }],
+    }));
+  };
+
+  // Handle style change
+  const handleStyleChange = (value: string) => {
+    setNavbarStyle({ value });
+  };
+
+  // Handle saving navbar configuration to Redux store
+  const handleSaveNav = () => {
+    const navbarStyles = {
+      flexDirection,
+      justifyContent,
+      alignItems,
+    };
+    const config = {
+      brand: brandText,
+      items: navConfig.items,
+      styles: navbarStyles,
+      colors: {
+        backgroundColor: navbarColor,
+        textColor: navbarTextColor,
+      },
+    };
+    // dispatch(setNavbarConfig(config)); // Save to Redux store
+    console.log("Navbar configuration saved to Redux store:", config);
+  };
+
+  // Get padding based on selected style
   const getPadding = () => {
-    switch (style) {
+    switch (navbarStyle.value) {
       case "minimal":
         return "py-2";
       case "extended":
@@ -41,26 +84,151 @@ const PageNav = ({
   };
 
   return (
-    <nav
-      className={`w-full px-6 flex items-center justify-between ${getPadding()}`}
-      style={{ backgroundColor: bgColor, color: textColor }}
-    >
-      <div className="flex items-center">
-        <div className="font-bold text-xl">{navConfig.brand}</div>
+    <div className="w-full">
+      {/* Configuration Panel */}
+      <div className="">
+        <div className="flex justify-between ">
+          <h2 className="text-xl font-semibold mb-4 text-gray-700">
+            Navigation Configuration
+          </h2>
+
+          <div>
+            <Button
+              onClick={handleSaveNav}
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer"
+            >
+              Save in Layout
+            </Button>
+          </div>
+        </div>
+        <hr className="my-4 border border-gray-400 border-dashed" />
+
+        {/* Navbar Color and Style Selection */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Navbar Brand and Style */}
+          <div className="space-y-4">
+            <div className="flex flex-col space-y-2">
+              <label className="font-medium text-gray-700">Brand Text:</label>
+              <input
+                type="text"
+                className="px-3 py-2 border border-gray-300 rounded-md"
+                value={brandText}
+                onChange={(e) => updateBrand(e.target.value)}
+              />
+            </div>
+
+            <div className="flex flex-col space-y-2">
+              <label className="font-medium text-gray-700">Navbar Style:</label>
+              <select
+                className="px-3 py-2 border border-gray-300 rounded-md"
+                value={navbarStyle.value}
+                onChange={(e) => handleStyleChange(e.target.value)}
+              >
+                <option value="default">Default</option>
+                <option value="minimal">Minimal</option>
+                <option value="extended">Extended</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Navbar Colors */}
+          <div className="space-y-4">
+            <div className="flex flex-col space-y-2">
+              <label className="font-medium text-gray-700">
+                Background Color:
+              </label>
+              <div className="flex items-center">
+                <input
+                  type="color"
+                  className="w-10 h-10 rounded cursor-pointer border border-gray-200"
+                  value={navbarColor}
+                  onChange={(e) => setNavbarColor(e.target.value)}
+                />
+                <span className="ml-3 text-gray-500">{navbarColor}</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col space-y-2">
+              <label className="font-medium text-gray-700">Text Color:</label>
+              <div className="flex items-center">
+                <input
+                  type="color"
+                  className="w-10 h-10 rounded cursor-pointer border border-gray-200"
+                  value={navbarTextColor}
+                  onChange={(e) => setNavbarTextColor(e.target.value)}
+                />
+                <span className="ml-3 text-gray-500">{navbarTextColor}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Navbar Layout Styles */}
+        <div className="mt-6 space-y-4">
+          <h3 className="text-lg font-semibold text-gray-700">
+            Navbar Layout Styles
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="flex flex-col space-y-2">
+              <label className="font-medium text-gray-700">
+                Flex Direction:
+              </label>
+              <input
+                type="text"
+                className="px-3 py-2 border border-gray-300 rounded-md"
+                value={flexDirection}
+                onChange={(e) => setFlexDirection(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col space-y-2">
+              <label className="font-medium text-gray-700">
+                Justify Content:
+              </label>
+              <input
+                type="text"
+                className="px-3 py-2 border border-gray-300 rounded-md"
+                value={justifyContent}
+                onChange={(e) => setJustifyContent(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col space-y-2">
+              <label className="font-medium text-gray-700">Align Items:</label>
+              <input
+                type="text"
+                className="px-3 py-2 border border-gray-300 rounded-md"
+                value={alignItems}
+                onChange={(e) => setAlignItems(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="flex items-center space-x-4">
-        {navConfig.items.map((item, index) => (
-          <a
-            key={index}
-            href={item.url}
-            className="hover:text-blue-500 transition-colors duration-200"
-          >
-            {item.label}
-          </a>
-        ))}
+      <hr className="my-4 border border-gray-400 border-dashed" />
+
+      {/* Actual Navbar Preview */}
+      <div className="my-5 bg-white rounded shadow-lg border border-gray-400 border-dashed p-1">
+        <h1 className="mb-2 text-2xl font-semibold">Navbar Preview</h1>
+        <nav
+          className={`w-full px-6 ${flexDirection} ${justifyContent} ${alignItems} ${getPadding()} mb-6 rounded`}
+          style={{ backgroundColor: navbarColor, color: navbarTextColor }}
+        >
+          <div className="font-bold text-xl">{navConfig.brand}</div>
+          <div className="flex items-center space-x-4">
+            {navConfig.items.map((item, index) => (
+              <a
+                key={index}
+                href={item.url}
+                className="hover:text-blue-500 transition-colors duration-200"
+                style={{ color: navbarTextColor }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </nav>
       </div>
-    </nav>
+    </div>
   );
 };
 

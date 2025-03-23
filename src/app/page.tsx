@@ -1,3 +1,5 @@
+import PageNav from "@/component/Layout/PageNav";
+import Preview from "@/component/Layout/preview/Preview";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -30,10 +32,10 @@ const tabList = [
 
 const Home = () => {
   return (
-    <div className="w-full  max-w-[1540px] mx-auto  px-[20px] h-screen mt-5">
-      <div className="flex gap-10 items-center">
+    <div className="w-full  max-w-[1540px] mx-auto  px-[20px] min-h-screen mt-5">
+      <div className="flex gap-10">
         <div>
-          <Tabs defaultValue="account" className="w-[500px] ">
+          <Tabs defaultValue="navigation" className="w-[500px] ">
             <TabsList className="grid w-full grid-cols-5 cursor-pointer">
               {tabList.map((tab) => (
                 <TabsTrigger
@@ -48,17 +50,12 @@ const Home = () => {
 
             {/* navigation */}
             <TabsContent value="navigation">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Account</CardTitle>
-                  <CardDescription></CardDescription>
-                </CardHeader>
+              <Card className="bg-transparent">
                 <CardContent className="space-y-2">
-                  <div></div>
+                  <div>
+                    <PageNav />
+                  </div>
                 </CardContent>
-                <CardFooter>
-                  <Button>Save changes</Button>
-                </CardFooter>
               </Card>
             </TabsContent>
 
@@ -95,7 +92,9 @@ const Home = () => {
             </TabsContent>
           </Tabs>
         </div>
-        <div></div>
+        <div className="w-full">
+          <Preview />
+        </div>
       </div>
     </div>
   );
