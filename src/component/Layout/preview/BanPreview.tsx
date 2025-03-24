@@ -16,6 +16,8 @@ interface BannerComponent {
     fontFamily?: string;
     headingAlign?: string;
     contentAlign?: string;
+    headingWeight?: string;
+    contentWeight?: string;
   };
   colors?: {
     backgroundColor?: string;
@@ -57,12 +59,16 @@ const BannerPreview = ({
         {/* Content Section */}
         <div>
           {heading && (
-            <h2 className={`${styles.headingSize} ${styles.headingAlign} `}>
+            <h2
+              className={`${styles.headingSize} ${styles.headingAlign} ${styles.headingWeight}`}
+            >
               {heading}
             </h2>
           )}
           {content && (
-            <div className={`${styles.contentSize} ${styles.contentAlign}`}>
+            <div
+              className={`${styles.contentSize} ${styles.contentAlign} ${styles.contentWeight}`}
+            >
               {content}
             </div>
           )}

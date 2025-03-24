@@ -85,6 +85,14 @@ const Banner = () => {
     { value: "items-stretch", label: "Stretch" },
   ];
 
+  const fontWeightOptions = [
+    { value: "font-normal", label: "Normal" },
+    { value: "font-medium", label: "Medium" },
+    { value: "font-semibold", label: "Semi Bold" },
+    { value: "font-bold", label: "Bold" },
+    { value: "font-extrabold", label: "Extra Bold" },
+  ];
+
   const gapOptions = [
     { value: "gap-0", label: "None" },
     { value: "gap-2", label: "Small" },
@@ -108,6 +116,8 @@ const Banner = () => {
   const [alignItems, setAlignItems] = useState("items-center");
   const [gap, setGap] = useState("gap-6");
   const [padding, setPadding] = useState("p-6");
+  const [headingWeight, setHeadingWeight] = useState("font-bold");
+  const [contentWeight, setContentWeight] = useState("font-normal");
 
   // Handle updating banner heading
   const updateHeading = (newHeading: string) => {
@@ -156,7 +166,6 @@ const Banner = () => {
   // Handle saving banner configuration to Redux store
   const handleSaveBanner = () => {
     const bannerStyles = {
-      display,
       flexDirection,
       justifyContent,
       alignItems,
@@ -167,6 +176,8 @@ const Banner = () => {
       fontFamily,
       headingAlign,
       contentAlign,
+      headingWeight,
+      contentWeight,
     };
 
     const config = {
@@ -217,10 +228,9 @@ const Banner = () => {
         <hr className="my-4 border border-gray-400 border-dashed" />
 
         {/* Banner Content and Style Selection */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Banner Content */}
-          <div className="space-y-4">
-            <div className="flex flex-col space-y-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+          <div className="space-y-4 w-full">
+            <div className="flex flex-col space-y-2 w-full">
               <label className="font-medium text-gray-700">Heading:</label>
               <input
                 type="text"
@@ -230,7 +240,7 @@ const Banner = () => {
               />
             </div>
 
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-2 w-full">
               <label className="font-medium text-gray-700">Content:</label>
               <textarea
                 className="px-3 py-2 border border-gray-300 rounded-md"
@@ -239,52 +249,9 @@ const Banner = () => {
                 onChange={(e) => updateContent(e.target.value)}
               />
             </div>
-
-            <div className="flex flex-col space-y-2">
-              <label className="font-medium text-gray-700">Image:</label>
-              <div className="flex items-center gap-4">
-                <label className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={bannerConfig.showImage}
-                    onChange={(e) => toggleImageDisplay(e.target.checked)}
-                  />
-                  Show Image
-                </label>
-              </div>
-            </div>
-
-            {bannerConfig.showImage && (
-              <>
-                <div className="flex flex-col space-y-2">
-                  <label className="font-medium text-gray-700">
-                    Image URL:
-                  </label>
-                  <input
-                    type="text"
-                    className="px-3 py-2 border border-gray-300 rounded-md"
-                    value={bannerConfig.imageUrl}
-                    onChange={(e) => updateImageUrl(e.target.value)}
-                  />
-                </div>
-                <div className="flex flex-col space-y-2">
-                  <label className="font-medium text-gray-700">
-                    Upload Image:
-                  </label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="px-3 py-2 border border-gray-300 rounded-md"
-                    onChange={handleImageUpload}
-                  />
-                </div>
-              </>
-            )}
           </div>
-
-          {/* Banner Colors and Text Styles */}
-          <div className="space-y-4">
-            <div className="flex flex-col space-y-2">
+          <div className="space-y-4 w-full">
+            <div className="flex flex-col space-y-2 w-full">
               <label className="font-medium text-gray-700">
                 Background Color:
               </label>
@@ -311,184 +278,233 @@ const Banner = () => {
                 <span className="ml-3 text-gray-500">{textColor}</span>
               </div>
             </div>
+          </div>
 
-            <div className="space-y-4">
-              <h4 className="font-medium text-gray-700">Text Styles</h4>
+          {/* style */}
 
-              <div className="flex flex-col space-y-2">
-                <label className="font-medium text-gray-700">
-                  Heading Size:
-                </label>
-                <select
-                  className="px-3 py-2 border border-gray-300 rounded-md"
-                  value={headingSize}
-                  onChange={(e) => setHeadingSize(e.target.value)}
-                >
-                  {headingSizeOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          <div className="flex flex-col space-y-2">
+            <label className="font-medium text-gray-700">Heading Size:</label>
+            <select
+              className="px-3 py-2 border border-gray-300 rounded-md"
+              value={headingSize}
+              onChange={(e) => setHeadingSize(e.target.value)}
+            >
+              {headingSizeOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
 
-              <div className="flex flex-col space-y-2">
-                <label className="font-medium text-gray-700">
-                  Heading Alignment:
-                </label>
-                <select
-                  className="px-3 py-2 border border-gray-300 rounded-md"
-                  value={headingAlign}
-                  onChange={(e) => setHeadingAlign(e.target.value)}
-                >
-                  {textAlignOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          <div className="flex flex-col space-y-2">
+            <label className="font-medium text-gray-700">
+              Heading Alignment:
+            </label>
+            <select
+              className="px-3 py-2 border border-gray-300 rounded-md"
+              value={headingAlign}
+              onChange={(e) => setHeadingAlign(e.target.value)}
+            >
+              {textAlignOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
 
-              <div className="flex flex-col space-y-2">
-                <label className="font-medium text-gray-700">
-                  Content Size:
-                </label>
-                <select
-                  className="px-3 py-2 border border-gray-300 rounded-md"
-                  value={contentSize}
-                  onChange={(e) => setContentSize(e.target.value)}
-                >
-                  {contentSizeOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          <div className="flex flex-col space-y-2">
+            <label className="font-medium text-gray-700">Content Size:</label>
+            <select
+              className="px-3 py-2 border border-gray-300 rounded-md"
+              value={contentSize}
+              onChange={(e) => setContentSize(e.target.value)}
+            >
+              {contentSizeOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
 
-              <div className="flex flex-col space-y-2">
-                <label className="font-medium text-gray-700">
-                  Content Alignment:
-                </label>
-                <select
-                  className="px-3 py-2 border border-gray-300 rounded-md"
-                  value={contentAlign}
-                  onChange={(e) => setContentAlign(e.target.value)}
-                >
-                  {textAlignOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          <div className="flex flex-col space-y-2">
+            <label className="font-medium text-gray-700">
+              Content Alignment:
+            </label>
+            <select
+              className="px-3 py-2 border border-gray-300 rounded-md"
+              value={contentAlign}
+              onChange={(e) => setContentAlign(e.target.value)}
+            >
+              {textAlignOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
 
-              <div className="flex flex-col space-y-2">
-                <label className="font-medium text-gray-700">
-                  Font Family:
-                </label>
-                <select
-                  className="px-3 py-2 border border-gray-300 rounded-md"
-                  value={fontFamily}
-                  onChange={(e) => setFontFamily(e.target.value)}
-                >
-                  {fontFamilyOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
+          <div className="flex flex-col space-y-2">
+            <label className="font-medium text-gray-700">Font Family:</label>
+            <select
+              className="px-3 py-2 border border-gray-300 rounded-md"
+              value={fontFamily}
+              onChange={(e) => setFontFamily(e.target.value)}
+            >
+              {fontFamilyOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex flex-col space-y-2">
+            <label className="font-medium text-gray-700">Flex Direction:</label>
+            <select
+              className="px-3 py-2 border border-gray-300 rounded-md"
+              value={flexDirection}
+              onChange={(e) => setFlexDirection(e.target.value)}
+            >
+              {flexDirectionOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex flex-col space-y-2">
+            <label className="font-medium text-gray-700">
+              Justify Content:
+            </label>
+            <select
+              className="px-3 py-2 border border-gray-300 rounded-md"
+              value={justifyContent}
+              onChange={(e) => setJustifyContent(e.target.value)}
+            >
+              {justifyContentOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex flex-col space-y-2">
+            <label className="font-medium text-gray-700">Align Items:</label>
+            <select
+              className="px-3 py-2 border border-gray-300 rounded-md"
+              value={alignItems}
+              onChange={(e) => setAlignItems(e.target.value)}
+            >
+              {alignItemsOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex flex-col space-y-2">
+            <label className="font-medium text-gray-700">Gap:</label>
+            <select
+              className="px-3 py-2 border border-gray-300 rounded-md"
+              value={gap}
+              onChange={(e) => setGap(e.target.value)}
+            >
+              {gapOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex flex-col space-y-2">
+            <label className="font-medium text-gray-700">Padding:</label>
+            <select
+              className="px-3 py-2 border border-gray-300 rounded-md"
+              value={padding}
+              onChange={(e) => setPadding(e.target.value)}
+            >
+              {paddingOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-col space-y-2">
+            <label className="font-medium text-gray-700">Heading Weight:</label>
+            <select
+              className="px-3 py-2 border border-gray-300 rounded-md"
+              value={headingWeight}
+              onChange={(e) => setHeadingWeight(e.target.value)}
+            >
+              {fontWeightOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex flex-col space-y-2">
+            <label className="font-medium text-gray-700">Content Weight:</label>
+            <select
+              className="px-3 py-2 border border-gray-300 rounded-md"
+              value={contentWeight}
+              onChange={(e) => setContentWeight(e.target.value)}
+            >
+              {fontWeightOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div className="my-5">
+        <div className="flex flex-col space-y-2">
+          <label className="font-medium text-gray-700">Image:</label>
+          <div className="flex items-center gap-4">
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={bannerConfig.showImage}
+                onChange={(e) => toggleImageDisplay(e.target.checked)}
+              />
+              Show Image
+            </label>
           </div>
         </div>
 
-        {/* Banner Layout Styles */}
-        <div className="mt-6 space-y-4">
-          <h3 className="text-lg font-semibold text-gray-700">
-            Banner Layout Styles
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {bannerConfig.showImage && (
+          <>
             <div className="flex flex-col space-y-2">
-              <label className="font-medium text-gray-700">
-                Flex Direction:
-              </label>
-              <select
+              <label className="font-medium text-gray-700">Image URL:</label>
+              <input
+                type="text"
                 className="px-3 py-2 border border-gray-300 rounded-md"
-                value={flexDirection}
-                onChange={(e) => setFlexDirection(e.target.value)}
-              >
-                {flexDirectionOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+                value={bannerConfig.imageUrl}
+                onChange={(e) => updateImageUrl(e.target.value)}
+              />
             </div>
-
             <div className="flex flex-col space-y-2">
-              <label className="font-medium text-gray-700">
-                Justify Content:
-              </label>
-              <select
+              <label className="font-medium text-gray-700">Upload Image:</label>
+              <input
+                type="file"
+                accept="image/*"
                 className="px-3 py-2 border border-gray-300 rounded-md"
-                value={justifyContent}
-                onChange={(e) => setJustifyContent(e.target.value)}
-              >
-                {justifyContentOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+                onChange={handleImageUpload}
+              />
             </div>
-
-            <div className="flex flex-col space-y-2">
-              <label className="font-medium text-gray-700">Align Items:</label>
-              <select
-                className="px-3 py-2 border border-gray-300 rounded-md"
-                value={alignItems}
-                onChange={(e) => setAlignItems(e.target.value)}
-              >
-                {alignItemsOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="flex flex-col space-y-2">
-              <label className="font-medium text-gray-700">Gap:</label>
-              <select
-                className="px-3 py-2 border border-gray-300 rounded-md"
-                value={gap}
-                onChange={(e) => setGap(e.target.value)}
-              >
-                {gapOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="flex flex-col space-y-2">
-              <label className="font-medium text-gray-700">Padding:</label>
-              <select
-                className="px-3 py-2 border border-gray-300 rounded-md"
-                value={padding}
-                onChange={(e) => setPadding(e.target.value)}
-              >
-                {paddingOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
 
       <hr className="my-4 border border-gray-400 border-dashed" />
@@ -497,22 +513,24 @@ const Banner = () => {
       <div className="my-5">
         <h1 className="mb-2 text-2xl font-semibold">Banner Preview</h1>
         <div
-          className={`${display} ${flexDirection} ${justifyContent} ${alignItems} ${gap} ${padding} ${fontFamily} rounded-lg overflow-hidden`}
+          className={`${display} ${flexDirection} ${justifyContent} ${alignItems} ${gap} ${padding} ${fontFamily}`}
           style={{
             backgroundColor,
             color: textColor,
           }}
         >
           {/* Content Section */}
-          <div className="flex-1 p-4">
+          <div>
             {bannerConfig.heading && (
-              <h2 className={`${headingSize} ${headingAlign} font-bold mb-2`}>
+              <h2 className={`${headingSize} ${headingAlign} ${headingWeight}`}>
                 {bannerConfig.heading}
               </h2>
             )}
 
             {bannerConfig.content && (
-              <div className={`${contentSize} ${contentAlign}`}>
+              <div
+                className={`${contentSize} ${contentAlign} ${contentWeight}`}
+              >
                 {bannerConfig.content}
               </div>
             )}
@@ -520,7 +538,7 @@ const Banner = () => {
 
           {/* Image Section */}
           {bannerConfig.showImage && bannerConfig.imageUrl && (
-            <div className="relative w-full max-w-md h-48">
+            <div>
               <Image
                 src={bannerConfig.imageUrl}
                 alt={bannerConfig.imageAlt}
