@@ -32,7 +32,7 @@ const tabList = [
 
 const Home = () => {
   return (
-    <div className="w-full  max-w-[1540px] mx-auto  px-[20px] min-h-screen mt-5">
+    <div className="w-full  max-w-[1540px] mx-auto  px-[20px] min-h-screen my-10">
       <div className="flex gap-10">
         <div>
           <Tabs defaultValue="navigation" className="w-[500px] ">
