@@ -57,7 +57,7 @@ const PageNav = () => {
     if (file) {
       setNavConfig((prevConfig) => ({
         ...prevConfig,
-        brandImage: URL.createObjectURL(file), // Store the image URL
+        brandImage: URL.createObjectURL(file),
       }));
     }
   };
