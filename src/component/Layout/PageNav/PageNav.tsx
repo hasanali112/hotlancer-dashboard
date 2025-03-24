@@ -1,7 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { setComponent } from "@/redux/features/layoutSlice";
+import { resetNavbar, setComponent } from "@/redux/features/layoutSlice";
+import Image from "next/image";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -17,6 +18,8 @@ const PageNav = () => {
   // Navbar configuration
   const [navConfig, setNavConfig] = useState({
     brand: "Brand Name",
+    brandType: "text", // 'text' or 'image'
+    brandImage: "", // Use an empty string instead of null
     items: [
       { label: "Home", url: "/" },
       { label: "About", url: "/about" },
@@ -40,6 +43,25 @@ const PageNav = () => {
     }));
   };
 
+  // Handle brand type change (text or image)
+  const handleBrandTypeChange = (type: "text" | "image") => {
+    setNavConfig((prevConfig) => ({
+      ...prevConfig,
+      brandType: type,
+    }));
+  };
+
+  // Handle image upload
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setNavConfig((prevConfig) => ({
+        ...prevConfig,
+        brandImage: URL.createObjectURL(file),
+      }));
+    }
+  };
+
   // Handle style change
   const handleStyleChange = (value: string) => {
     setNavbarStyle({ value });
@@ -55,6 +77,8 @@ const PageNav = () => {
     };
     const config = {
       brand: brandText,
+      brandType: navConfig.brandType,
+      brandImage: navConfig.brandImage,
       items: navConfig.items,
       navStyles: navbarStyles,
       colors: {
@@ -63,7 +87,10 @@ const PageNav = () => {
       },
     };
     dispatch(setComponent(config));
-    console.log("Navbar configuration saved to Redux store:", config);
+  };
+
+  const handleResetNav = () => {
+    dispatch(resetNavbar());
   };
 
   // Get padding based on selected style
@@ -84,15 +111,21 @@ const PageNav = () => {
       <div className="">
         <div className="flex justify-between ">
           <h2 className="text-xl font-semibold mb-4 text-gray-700">
-            Navigation Configuration
+            Navbar Configuration
           </h2>
 
-          <div>
+          <div className="flex gap-2">
             <Button
               onClick={handleSaveNav}
               className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer"
             >
               Save in Layout
+            </Button>
+            <Button
+              onClick={handleResetNav}
+              className="px-4 py-2 bg-white text-blue-500  rounded hover:bg-gray-200 cursor-pointer border border-blue-500"
+            >
+              Reset
             </Button>
           </div>
         </div>
@@ -103,14 +136,54 @@ const PageNav = () => {
           {/* Navbar Brand and Style */}
           <div className="space-y-4">
             <div className="flex flex-col space-y-2">
-              <label className="font-medium text-gray-700">Brand Text:</label>
-              <input
-                type="text"
-                className="px-3 py-2 border border-gray-300 rounded-md"
-                value={brandText}
-                onChange={(e) => updateBrand(e.target.value)}
-              />
+              <label className="font-medium text-gray-700">Brand Type:</label>
+              <div className="flex gap-4">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="brandType"
+                    value="text"
+                    checked={navConfig.brandType === "text"}
+                    onChange={() => handleBrandTypeChange("text")}
+                  />
+                  Text
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="brandType"
+                    value="image"
+                    checked={navConfig.brandType === "image"}
+                    onChange={() => handleBrandTypeChange("image")}
+                  />
+                  Image
+                </label>
+              </div>
             </div>
+
+            {navConfig.brandType === "text" ? (
+              <div className="flex flex-col space-y-2">
+                <label className="font-medium text-gray-700">Brand Text:</label>
+                <input
+                  type="text"
+                  className="px-3 py-2 border border-gray-300 rounded-md"
+                  value={brandText}
+                  onChange={(e) => updateBrand(e.target.value)}
+                />
+              </div>
+            ) : (
+              <div className="flex flex-col space-y-2">
+                <label className="font-medium text-gray-700">
+                  Brand Image:
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="px-3 py-2 border border-gray-300 rounded-md"
+                  onChange={handleImageUpload}
+                />
+              </div>
+            )}
 
             <div className="flex flex-col space-y-2">
               <label className="font-medium text-gray-700">Navbar Style:</label>
@@ -217,7 +290,19 @@ const PageNav = () => {
           className={`w-full px-6 ${gap}  ${flexDirection} ${justifyContent} ${alignItems} ${getPadding()} mb-6 rounded`}
           style={{ backgroundColor: navbarColor, color: navbarTextColor }}
         >
-          <div className="font-bold text-xl">{navConfig.brand}</div>
+          {navConfig.brandType === "text" ? (
+            <div className="font-bold text-xl">{navConfig.brand}</div>
+          ) : (
+            navConfig.brandImage && (
+              <Image
+                src={navConfig.brandImage}
+                alt="Brand Logo"
+                width={100}
+                height={100}
+                className="w-10"
+              />
+            )
+          )}
           <div className="flex items-center space-x-4">
             {navConfig.items.map((item, index) => (
               <a
