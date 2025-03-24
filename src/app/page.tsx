@@ -1,4 +1,6 @@
-import PageNav from "@/component/Layout/PageNav";
+import Banner from "@/component/Layout/PageBannar/Banner";
+import PageNav from "@/component/Layout/PageNav/PageNav";
+
 import Preview from "@/component/Layout/preview/Preview";
 import { Button } from "@/components/ui/button";
 import {
@@ -62,16 +64,11 @@ const Home = () => {
             {/* banner */}
             <TabsContent value="banner">
               <Card>
-                <CardHeader>
-                  <CardTitle>Password</CardTitle>
-                  <CardDescription></CardDescription>
-                </CardHeader>
                 <CardContent className="space-y-2">
-                  <div></div>
+                  <div>
+                    <Banner />
+                  </div>
                 </CardContent>
-                <CardFooter>
-                  <Button>Save password</Button>
-                </CardFooter>
               </Card>
             </TabsContent>
 
