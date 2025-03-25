@@ -1,8 +1,8 @@
-import { baseApi } from "../api/baseApi";
+import { baseApi } from "@/redux/api/baseApi";
 
-const layoutApi = baseApi.injectEndpoints({
+const domainApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    createLayout: builder.mutation({
+    createDomain: builder.mutation({
       query: (data) => ({
         url: "/create-component",
         method: "POST",
@@ -13,4 +13,4 @@ const layoutApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateLayoutMutation } = layoutApi;
+export const { useCreateDomainMutation } = domainApi;
