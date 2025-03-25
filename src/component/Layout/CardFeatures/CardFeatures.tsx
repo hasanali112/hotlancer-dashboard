@@ -6,7 +6,7 @@ import {
 } from "@/Constant/DefaultValues";
 import { Feature } from "@/types/Interface";
 import { useAppDispatch } from "@/redux/hook";
-import { setComponent } from "@/redux/features/layoutSlice";
+import { setComponent } from "@/redux/features/layout/layoutSlice";
 
 const CardFeatures = () => {
   const dispatch = useAppDispatch();
