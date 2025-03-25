@@ -31,10 +31,10 @@ const Navbar = () => {
                 Home
               </Link>
               <Link
-                href="/Linkbout"
+                href="/domain-list"
                 className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
               >
-                About
+                Domain List
               </Link>
               <Link
                 href="/services"
