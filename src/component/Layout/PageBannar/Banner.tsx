@@ -2,7 +2,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { resetBanner, setBanner } from "@/redux/features/layoutSlice";
+import { resetBanner, setBanner } from "@/redux/features/layout/layoutSlice";
 import Image from "next/image";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";

@@ -5,7 +5,7 @@ import { useAppSelector } from "@/redux/hook";
 import React from "react";
 import NavPreview from "./NavPreview";
 import BanPreview from "./BanPreview";
-import { useCreateLayoutMutation } from "@/redux/features/layout.api";
+import { useCreateLayoutMutation } from "@/redux/features/layout/layout.api";
 
 const Preview = () => {
   const { navComponent, bannerComponent } = useAppSelector(
