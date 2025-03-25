@@ -6,9 +6,10 @@ import React from "react";
 import NavPreview from "./NavPreview";
 import BanPreview from "./BanPreview";
 import { useCreateLayoutMutation } from "@/redux/features/layout.api";
+import FeaturesPreview from "./FeaturePreview";
 
 const Preview = () => {
-  const { navComponent, bannerComponent } = useAppSelector(
+  const { navComponent, bannerComponent, featuresComponent } = useAppSelector(
     (state) => state.layout as any
   );
   const [createLayout] = useCreateLayoutMutation();
@@ -17,6 +18,7 @@ const Preview = () => {
     const data = {
       ...(navComponent && { navComponent: navComponent }),
       ...(bannerComponent && { bannerComponent: bannerComponent }),
+      ...(featuresComponent && { featuresComponent }),
     };
     try {
       const response = await createLayout(data);
@@ -36,6 +38,9 @@ const Preview = () => {
             {navComponent && <NavPreview navComponent={navComponent} />}
             {bannerComponent && (
               <BanPreview bannerComponent={bannerComponent} />
+            )}
+            {featuresComponent && (
+              <FeaturesPreview featuresComponent={featuresComponent} />
             )}
           </div>
           <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
