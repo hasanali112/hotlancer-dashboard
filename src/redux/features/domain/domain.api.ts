@@ -10,7 +10,15 @@ const domainApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["component"],
     }),
+    getDomain: builder.query({
+      query: (arg) => ({
+        url: "/domains",
+        method: "GET",
+        params: arg,
+      }),
+      providesTags: ["component"],
+    }),
   }),
 });
 
-export const { useCreateDomainMutation } = domainApi;
+export const { useCreateDomainMutation, useGetDomainQuery } = domainApi;

@@ -13,6 +13,7 @@ export interface Feature {
   cardBorderRadius?: string;
 }
 
+
 export interface Card {
   icon: string;
   title: string;
@@ -49,4 +50,10 @@ export interface Card {
 
 export interface Cards {
   cards: Card[];
+
+export interface IDomain {
+  _id: string;
+  domainNameList: string;
+  customerName: string;
+
 }
