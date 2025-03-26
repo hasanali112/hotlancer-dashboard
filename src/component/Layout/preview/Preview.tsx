@@ -5,12 +5,14 @@ import { useAppSelector } from "@/redux/hook";
 import React from "react";
 import NavPreview from "./NavPreview";
 import BanPreview from "./BanPreview";
+
+import FeaturesPreview from "./FeaturePreview";
 import { useCreateLayoutMutation } from "@/redux/features/layout/layout.api";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 const Preview = () => {
-  const { navComponent, bannerComponent } = useAppSelector(
+  const { navComponent, bannerComponent, featuresComponent } = useAppSelector(
     (state) => state.layout as any
   );
   const [createLayout, { isLoading }] = useCreateLayoutMutation();
@@ -19,6 +21,7 @@ const Preview = () => {
     const data = {
       ...(navComponent && { navComponent: navComponent }),
       ...(bannerComponent && { bannerComponent: bannerComponent }),
+      ...(featuresComponent && { featuresComponent }),
     };
     try {
       const response = await createLayout(data).unwrap();
@@ -41,6 +44,9 @@ const Preview = () => {
             {navComponent && <NavPreview navComponent={navComponent} />}
             {bannerComponent && (
               <BanPreview bannerComponent={bannerComponent} />
+            )}
+            {featuresComponent && (
+              <FeaturesPreview featuresComponent={featuresComponent} />
             )}
           </div>
           <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">

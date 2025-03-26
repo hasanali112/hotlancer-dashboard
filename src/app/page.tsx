@@ -1,3 +1,4 @@
+import Features from "@/component/Layout/CardFeatures/Features";
 import Banner from "@/component/Layout/PageBannar/Banner";
 import PageNav from "@/component/Layout/PageNav/PageNav";
 
@@ -72,15 +73,24 @@ const Home = () => {
               </Card>
             </TabsContent>
 
-            {/* banner */}
+            {/* features */}
             <TabsContent value="features">
+              <Card>
+                <CardContent className="space-y-2">
+                  <Features />
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* forms */}
+            <TabsContent value="forms">
               <Card>
                 <CardHeader>
                   <CardTitle>Password</CardTitle>
                   <CardDescription></CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  <div></div>
+                  <div>Forms content coming soon</div>
                 </CardContent>
                 <CardFooter>
                   <Button>Save password</Button>
