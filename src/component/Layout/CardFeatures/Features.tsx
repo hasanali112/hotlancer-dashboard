@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,23 @@ import { useAppSelector } from "@/redux/hook";
 import * as Icons from "lucide-react";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+
+const ANIMATION_TYPES = [
+  { value: "none", label: "None" },
+  { value: "fade", label: "Fade" },
+  { value: "slide-up", label: "Slide Up" },
+  { value: "slide-down", label: "Slide Down" },
+  { value: "zoom", label: "Zoom" },
+  { value: "bounce", label: "Bounce" },
+];
+
+const TIMING_FUNCTIONS = [
+  { value: "ease", label: "Ease" },
+  { value: "ease-in", label: "Ease In" },
+  { value: "ease-out", label: "Ease Out" },
+  { value: "ease-in-out", label: "Ease In Out" },
+  { value: "linear", label: "Linear" },
+];
 
 const Features = () => {
   const dispatch = useDispatch();
@@ -24,6 +42,12 @@ const Features = () => {
       styles: {
         ...features.cards[0].styles,
       },
+      animation: {
+        type: "none",
+        duration: "1000ms",
+        delay: "0ms",
+        timing: "ease",
+      },
     };
     setFeaturesState({
       ...features,
@@ -32,9 +56,19 @@ const Features = () => {
   };
 
   // Update feature card
-  const updateFeatureCard = (index: number, field: string, value: string) => {
+  const updateFeatureCard = (index: number, field: string, value: any) => {
     const updatedCards = features.cards.map((card, i) => {
       if (i === index) {
+        // Handle nested animation object
+        if (field === "animation") {
+          return {
+            ...card,
+            animation: {
+              ...card.animation,
+              ...value,
+            },
+          };
+        }
         return {
           ...card,
           [field]: value,
@@ -363,6 +397,77 @@ const Features = () => {
                 className="w-full p-2 border rounded"
                 placeholder="e.g., 1rem"
               />
+            </div>
+          </div>
+
+          <div className="mt-4 grid grid-cols-2 gap-4">
+            <div>
+              <label>Animation Type</label>
+              <select
+                value={card?.animation?.type}
+                onChange={(e) =>
+                  updateFeatureCard(index, "animation", {
+                    ...card.animation,
+                    type: e.target.value,
+                  })
+                }
+                className="w-full p-2 border rounded"
+              >
+                {ANIMATION_TYPES.map((anim) => (
+                  <option key={anim.value} value={anim.value}>
+                    {anim.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label>Duration (ms)</label>
+              <input
+                type="text"
+                value={card?.animation?.duration}
+                onChange={(e) =>
+                  updateFeatureCard(index, "animation", {
+                    ...card.animation,
+                    duration: e.target.value,
+                  })
+                }
+                className="w-full p-2 border rounded"
+                placeholder="e.g., 500ms"
+              />
+            </div>
+            <div>
+              <label>Delay (ms)</label>
+              <input
+                type="text"
+                value={card?.animation?.delay}
+                onChange={(e) =>
+                  updateFeatureCard(index, "animation", {
+                    ...card.animation,
+                    delay: e.target.value,
+                  })
+                }
+                className="w-full p-2 border rounded"
+                placeholder="e.g., 100ms"
+              />
+            </div>
+            <div>
+              <label>Timing Function</label>
+              <select
+                value={card?.animation?.timing}
+                onChange={(e) =>
+                  updateFeatureCard(index, "animation", {
+                    ...card.animation,
+                    timing: e.target.value,
+                  })
+                }
+                className="w-full p-2 border rounded"
+              >
+                {TIMING_FUNCTIONS.map((timing) => (
+                  <option key={timing.value} value={timing.value}>
+                    {timing.label}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
         </div>

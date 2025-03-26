@@ -37,6 +37,12 @@ const initialState = {
             fontSize: "1rem",
           },
         },
+        animation: {
+          type: "none",
+          duration: "500ms",
+          delay: "0ms",
+          timing: "ease-in-out",
+        },
       },
     ],
   },
