@@ -12,3 +12,9 @@ export interface Feature {
   cardBorderWidth?: string;
   cardBorderRadius?: string;
 }
+
+export interface IDomain {
+  _id: string;
+  domainNameList: string;
+  customerName: string;
+}
