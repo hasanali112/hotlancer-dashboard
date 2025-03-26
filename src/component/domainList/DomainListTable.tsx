@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -13,17 +14,16 @@ import { IDomain } from "@/types/Interface";
 
 const DomainListTable = () => {
   const { data: demainList } = useGetDomainQuery({});
-  console.log(demainList);
 
   return (
-    <div>
+    <div className="table-auto w-full text-left  bg-white p-3">
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">SL NO.</TableHead>
             <TableHead>Domain List</TableHead>
             <TableHead>Customers Name</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
+            <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -34,6 +34,11 @@ const DomainListTable = () => {
                 {item.domainNameList}
               </TableCell>
               <TableCell>{item.customerName}</TableCell>
+              <TableCell>
+                <Button className="bg-red-500 rounded cursor-pointer">
+                  Block
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

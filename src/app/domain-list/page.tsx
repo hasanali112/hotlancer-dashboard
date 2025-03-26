@@ -27,7 +27,7 @@ const DomainList = () => {
   };
 
   return (
-    <div className="w-full  max-w-[1540px] mx-auto  px-[20px] min-h-screen my-10">
+    <div className="w-full max-w-[1540px] mx-auto px-[20px] min-h-screen my-10">
       <h1 className="text-2xl font-bold mb-4 text-center">
         Create Domain List
       </h1>
@@ -46,7 +46,7 @@ const DomainList = () => {
               />
             </div>
             <div className="flex flex-col space-y-2">
-              <label htmlFor="customerName">Customers Name</label>
+              <label htmlFor="customerName">Customer Name</label>
               <input
                 type="text"
                 id="customerName"
@@ -70,10 +70,13 @@ const DomainList = () => {
         </form>
       </div>
 
-      <div>
+      <div className="w-full mt-10">
         <h1 className="text-2xl font-bold my-5 text-center">Domain List</h1>
         <div className="flex justify-center items-center w-full">
-          <DomainListTable />
+          <div className="w-[60%] overflow-x-auto shadow-md p-2">
+            {/* Add utility classes for full width and responsive scrolling */}
+            <DomainListTable />
+          </div>
         </div>
       </div>
     </div>

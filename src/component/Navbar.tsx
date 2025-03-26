@@ -26,9 +26,15 @@ const Navbar = () => {
             <div className="ml-10 flex items-baseline space-x-4">
               <Link
                 href="/"
-                className="px-3 py-2 rounded-md text-sm font-medium bg-gray-900"
+                className="px-3 py-2 rounded-md text-sm font-medium "
               >
                 Home
+              </Link>
+              <Link
+                href="/layout-list"
+                className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+              >
+                Layout List
               </Link>
               <Link
                 href="/domain-list"
@@ -36,12 +42,7 @@ const Navbar = () => {
               >
                 Domain List
               </Link>
-              <Link
-                href="/services"
-                className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
-              >
-                Services
-              </Link>
+
               <Link
                 href="/contact"
                 className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
