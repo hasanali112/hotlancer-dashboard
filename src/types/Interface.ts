@@ -13,8 +13,47 @@ export interface Feature {
   cardBorderRadius?: string;
 }
 
+
+export interface Card {
+  icon: string;
+  title: string;
+  description: string;
+  styles: {
+    card: {
+      backgroundColor: string;
+      borderRadius: string;
+      borderColor: string;
+      borderWidth: string;
+      shadowColor: string;
+      shadowOpacity: string;
+      width: string;
+      height: string;
+      padding: string;
+    };
+    icon: {
+      backgroundColor: string;
+      color: string;
+      size: string;
+      padding: string;
+    };
+    title: {
+      color: string;
+      fontSize: string;
+      fontWeight: string;
+    };
+    description: {
+      color: string;
+      fontSize: string;
+    };
+  };
+}
+
+export interface Cards {
+  cards: Card[];
+
 export interface IDomain {
   _id: string;
   domainNameList: string;
   customerName: string;
+
 }
