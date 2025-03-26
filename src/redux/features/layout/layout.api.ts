@@ -10,7 +10,14 @@ const layoutApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["component"],
     }),
+    getAllLayout: builder.query({
+      query: () => ({
+        url: "/components",
+        method: "GET",
+      }),
+      providesTags: ["component"],
+    }),
   }),
 });
 
-export const { useCreateLayoutMutation } = layoutApi;
+export const { useCreateLayoutMutation, useGetAllLayoutQuery } = layoutApi;

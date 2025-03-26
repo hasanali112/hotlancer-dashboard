@@ -35,7 +35,6 @@ const BannerPreview = ({
 }: {
   bannerComponent?: BannerComponent;
 }) => {
-  console.log(bannerComponent);
   // Provide default values
   const {
     styles = {},

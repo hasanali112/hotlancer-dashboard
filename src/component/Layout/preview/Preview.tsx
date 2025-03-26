@@ -8,12 +8,14 @@ import BanPreview from "./BanPreview";
 
 import FeaturesPreview from "./FeaturePreview";
 import { useCreateLayoutMutation } from "@/redux/features/layout/layout.api";
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 const Preview = () => {
   const { navComponent, bannerComponent, featuresComponent } = useAppSelector(
     (state) => state.layout as any
   );
-  const [createLayout] = useCreateLayoutMutation();
+  const [createLayout, { isLoading }] = useCreateLayoutMutation();
 
   const handleComponent = async () => {
     const data = {
@@ -22,8 +24,11 @@ const Preview = () => {
       ...(featuresComponent && { featuresComponent }),
     };
     try {
-      const response = await createLayout(data);
+      const response = await createLayout(data).unwrap();
       console.log(response);
+      if (response?.data?.success === true) {
+        toast.success(response?.data?.message);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -59,9 +64,13 @@ const Preview = () => {
         </button>
         <button
           onClick={handleComponent}
-          className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-md transition duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded transition duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 w-[80px] cursor-pointer flex items-center justify-center"
         >
-          Save Configuration
+          {isLoading ? (
+            <Loader2 className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
+          ) : (
+            "Save"
+          )}
         </button>
       </div>
     </div>
