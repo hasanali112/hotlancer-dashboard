@@ -1,7 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { resetFeatures, setFeatures } from "@/redux/features/layoutSlice";
+import {
+  resetFeatures,
+  setFeatures,
+} from "@/redux/features/layout/layoutSlice";
 import { useAppSelector } from "@/redux/hook";
 import * as Icons from "lucide-react";
 import React, { useState } from "react";
