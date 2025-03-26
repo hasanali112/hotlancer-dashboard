@@ -104,7 +104,7 @@ const Preview = () => {
                 </Button>
               </div>
             </TooltipTrigger>
-            {layoutNames === "" && ( // Only show tooltip when button is disabled
+            {layoutNames === "" && (
               <TooltipContent side="top">
                 <p>Please provide the layout name</p>
               </TooltipContent>
