@@ -11,39 +11,30 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import FeaturesPreview from "./FeaturePreview";
 import { useCreateLayoutMutation } from "@/redux/features/layout/layout.api";
-
 import DescriptiveSectionPreview from "./DescriptiveSectionPreview";
 
 const Preview = () => {
+  const [layoutNames, setLayoutNames] = useState("");
   const {
     navComponent,
     bannerComponent,
     featuresComponent,
     descriptiveSection,
   } = useAppSelector((state) => state.layout as any);
-  const [createLayout] = useCreateLayoutMutation();
-
-import { Loader2 } from "lucide-react";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-
-const Preview = () => {
-  const [layoutNames, setLayoutNames] = useState("");
-  const { navComponent, bannerComponent, featuresComponent } = useAppSelector(
-    (state) => state.layout as any
-  );
   const [createLayout, { isLoading }] = useCreateLayoutMutation();
-
 
   const handleComponent = async () => {
     const data = {
       layoutName: layoutNames,
-      ...(navComponent && { navComponent: navComponent }),
-      ...(bannerComponent && { bannerComponent: bannerComponent }),
+      ...(navComponent && { navComponent }),
+      ...(bannerComponent && { bannerComponent }),
       ...(featuresComponent && { featuresComponent }),
+      ...(descriptiveSection && { descriptiveSection }),
     };
     try {
       const response = await createLayout(data).unwrap();
@@ -58,7 +49,7 @@ const Preview = () => {
   return (
     <div className="shadow-lg shadow-blue-200 rounded-lg w-full">
       <div className="bg-white p-6 mb-6">
-        <div className="flex flex-col ">
+        <div className="flex flex-col">
           <h2 className="text-xl font-semibold mb-4 text-gray-700">Preview</h2>
           <div className="mb-4 space-y-3">
             <label htmlFor="layoutName" className="block text-gray-700">
@@ -69,8 +60,9 @@ const Preview = () => {
               id="layoutName"
               name="layoutName"
               placeholder="Layout Name"
-              className="border border-gray-300 rounded  w-[400px] h-[40px] px-4"
+              className="border border-gray-300 rounded w-[400px] h-[40px] px-4"
               onChange={(e) => setLayoutNames(e.target.value)}
+              value={layoutNames}
             />
           </div>
         </div>
@@ -107,8 +99,6 @@ const Preview = () => {
           <Tooltip>
             <TooltipTrigger asChild>
               <div>
-                {" "}
-                {/* Wrap the Button in a div for the TooltipTrigger */}
                 <Button
                   disabled={layoutNames === ""}
                   onClick={handleComponent}
