@@ -8,11 +8,15 @@ import BanPreview from "./BanPreview";
 
 import FeaturesPreview from "./FeaturePreview";
 import { useCreateLayoutMutation } from "@/redux/features/layout/layout.api";
+import DescriptiveSectionPreview from "./DescriptiveSectionPreview";
 
 const Preview = () => {
-  const { navComponent, bannerComponent, featuresComponent } = useAppSelector(
-    (state) => state.layout as any
-  );
+  const {
+    navComponent,
+    bannerComponent,
+    featuresComponent,
+    descriptiveSection,
+  } = useAppSelector((state) => state.layout as any);
   const [createLayout] = useCreateLayoutMutation();
 
   const handleComponent = async () => {
@@ -42,6 +46,11 @@ const Preview = () => {
             )}
             {featuresComponent && (
               <FeaturesPreview featuresComponent={featuresComponent} />
+            )}
+            {descriptiveSection && (
+              <DescriptiveSectionPreview
+                sections={descriptiveSection.sections}
+              />
             )}
           </div>
           <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
