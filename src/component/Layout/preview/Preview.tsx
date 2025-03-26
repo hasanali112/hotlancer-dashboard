@@ -14,6 +14,18 @@ import {
 
 import FeaturesPreview from "./FeaturePreview";
 import { useCreateLayoutMutation } from "@/redux/features/layout/layout.api";
+
+import DescriptiveSectionPreview from "./DescriptiveSectionPreview";
+
+const Preview = () => {
+  const {
+    navComponent,
+    bannerComponent,
+    featuresComponent,
+    descriptiveSection,
+  } = useAppSelector((state) => state.layout as any);
+  const [createLayout] = useCreateLayoutMutation();
+
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -24,6 +36,7 @@ const Preview = () => {
     (state) => state.layout as any
   );
   const [createLayout, { isLoading }] = useCreateLayoutMutation();
+
 
   const handleComponent = async () => {
     const data = {
@@ -70,6 +83,11 @@ const Preview = () => {
             )}
             {featuresComponent && (
               <FeaturesPreview featuresComponent={featuresComponent} />
+            )}
+            {descriptiveSection && (
+              <DescriptiveSectionPreview
+                sections={descriptiveSection.sections}
+              />
             )}
           </div>
           <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
