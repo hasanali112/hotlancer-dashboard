@@ -67,7 +67,7 @@ type StyleElements = {
   content: {
     textAlign: string;
   };
-  heading: {
+  title: {
     color: string;
     fontSize: string;
     fontWeight: string;
@@ -149,10 +149,10 @@ export interface ICardConfig {
   flexDirection: string;
   justifyContent: string;
   alignItems: string;
-  headingSize: string;
-  contentSize: string;
+  titleSize: string;
+  descriptionSize: string;
   fontFamily: string;
-  headingWeight: string;
-  contentWeight: string;
+  titleWeight: string;
+  descriptionWeight: string;
   borderWidth: string;
 }
