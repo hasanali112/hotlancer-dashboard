@@ -73,6 +73,14 @@ const Features = () => {
           <h2 className="text-xl font-semibold text-gray-700">
             Features Configuration
           </h2>
+          <div className="flex gap-2">
+            <Button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer">
+              Save in Layout
+            </Button>
+            <Button className="px-4 py-2 bg-white text-blue-500  rounded hover:bg-gray-200 cursor-pointer border border-blue-500">
+              Reset
+            </Button>
+          </div>
         </div>
 
         <hr className="my-4 border border-gray-400 border-dashed" />
@@ -177,7 +185,7 @@ const Features = () => {
                       Title Size
                     </label>
                     <select
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-1 border border-gray-300 rounded"
                       value={
                         cards.find((c) => c.id === editingCardId)?.titleSize ||
                         "text-xl"
@@ -201,7 +209,7 @@ const Features = () => {
                       Title Weight
                     </label>
                     <select
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-1 border border-gray-300 rounded"
                       value={
                         cards.find((c) => c.id === editingCardId)
                           ?.titleWeight || "font-bold"
@@ -227,7 +235,7 @@ const Features = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 border border-gray-300 rounded"
                       value={
                         cards.find((c) => c.id === editingCardId)?.title || ""
                       }
@@ -247,7 +255,7 @@ const Features = () => {
                       Description Size
                     </label>
                     <select
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-1 border border-gray-300 rounded"
                       value={
                         cards.find((c) => c.id === editingCardId)
                           ?.descriptionSize || "text-base"
@@ -270,7 +278,7 @@ const Features = () => {
                       Description Weight
                     </label>
                     <select
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-1 border border-gray-300 rounded"
                       value={
                         cards.find((c) => c.id === editingCardId)
                           ?.descriptionWeight || "font-normal"
@@ -316,7 +324,7 @@ const Features = () => {
                     Font Family
                   </label>
                   <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-3 py-1 border border-gray-300 rounded"
                     value={
                       cards.find((c) => c.id === editingCardId)?.fontFamily ||
                       "font-sans"
@@ -341,7 +349,7 @@ const Features = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-1 border border-gray-300 rounded"
                       maxLength={2}
                       value={
                         cards.find((c) => c.id === editingCardId)?.icon || ""
@@ -355,13 +363,13 @@ const Features = () => {
               </div>
 
               {/* layout style */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Flex Direction
                   </label>
                   <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-3 py-1 border border-gray-300 rounded"
                     value={
                       cards.find((c) => c.id === editingCardId)
                         ?.flexDirection || "flex-col"
@@ -385,7 +393,7 @@ const Features = () => {
                     Justify Content
                   </label>
                   <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-3 py-1 border border-gray-300 rounded"
                     value={
                       cards.find((c) => c.id === editingCardId)
                         ?.justifyContent || "justify-center"
@@ -409,7 +417,7 @@ const Features = () => {
                     Align Items
                   </label>
                   <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-3 py-1 border border-gray-300 rounded"
                     value={
                       cards.find((c) => c.id === editingCardId)?.alignItems ||
                       "items-center"
@@ -433,7 +441,7 @@ const Features = () => {
                     Gap
                   </label>
                   <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-3 py-1 border border-gray-300 rounded"
                     value={
                       cards.find((c) => c.id === editingCardId)?.gap || "gap-4"
                     }
@@ -454,7 +462,7 @@ const Features = () => {
                     Padding
                   </label>
                   <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-3 py-1 border border-gray-300 rounded"
                     value={
                       cards.find((c) => c.id === editingCardId)?.padding ||
                       "p-4"
@@ -476,7 +484,7 @@ const Features = () => {
                     Border Radius
                   </label>
                   <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-3 py-1 border border-gray-300 rounded"
                     value={
                       cards.find((c) => c.id === editingCardId)?.borderRadius ||
                       "rounded"
@@ -500,7 +508,7 @@ const Features = () => {
                     Border Width
                   </label>
                   <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-3 py-1 border border-gray-300 rounded"
                     value={
                       cards.find((c) => c.id === editingCardId)?.borderWidth ||
                       "border"
@@ -522,13 +530,13 @@ const Features = () => {
               <div className="flex justify-end gap-2 mt-4">
                 <button
                   onClick={cancelEditing}
-                  className="px-4 py-2 bg-white text-blue-500 rounded hover:bg-gray-200 cursor-pointer border border-blue-500"
+                  className="px-4 py-1 bg-white text-blue-500 rounded hover:bg-gray-200 cursor-pointer border border-blue-500"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => setEditingCardId(null)}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer"
+                  className="px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer"
                 >
                   Done
                 </button>
