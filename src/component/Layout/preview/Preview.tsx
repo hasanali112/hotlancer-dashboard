@@ -16,6 +16,7 @@ const Preview = () => {
     bannerComponent,
     featuresComponent,
     descriptiveSection,
+    parallaxSection,
   } = useAppSelector((state) => state.layout as any);
   const [createLayout] = useCreateLayoutMutation();
 
@@ -24,6 +25,8 @@ const Preview = () => {
       ...(navComponent && { navComponent: navComponent }),
       ...(bannerComponent && { bannerComponent: bannerComponent }),
       ...(featuresComponent && { featuresComponent }),
+      ...(descriptiveSection && { descriptiveSection: descriptiveSection }),
+      ...(parallaxSection && { parallaxSection: parallaxSection }),
     };
     try {
       const response = await createLayout(data);
@@ -52,6 +55,9 @@ const Preview = () => {
                 sections={descriptiveSection.sections}
               />
             )}
+            {/* {parallaxSection && (
+              <ParallaxSectionPreview sections={parallaxSection.sections} />
+            )} */}
           </div>
           <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
             <h1 className="text-2xl font-semibold text-gray-700">

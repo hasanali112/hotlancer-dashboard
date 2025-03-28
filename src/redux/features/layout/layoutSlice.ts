@@ -90,6 +90,48 @@ const initialState = {
       },
     ],
   },
+  // parallaxSection: {
+  //   sections: [
+  //     {
+  //       backgroundImage: "/default-parallax.jpg",
+  //       overlayColor: "rgba(0, 0, 0, 0.5)",
+  //       title: "Your Title Here",
+  //       subtitle: "Your Subtitle Here",
+  //       buttonText: "Learn More",
+  //       buttonLink: "#",
+  //       styles: {
+  //         container: {
+  //           height: "500px",
+  //           padding: "2rem",
+  //         },
+  //         content: {
+  //           maxWidth: "800px",
+  //           textAlign: "center",
+  //         },
+  //         title: {
+  //           color: "#ffffff",
+  //           fontSize: "3rem",
+  //           fontWeight: "700",
+  //           marginBottom: "1rem",
+  //         },
+  //         subtitle: {
+  //           color: "#ffffff",
+  //           fontSize: "1.5rem",
+  //           fontWeight: "400",
+  //           marginBottom: "2rem",
+  //         },
+  //         button: {
+  //           backgroundColor: "#4f46e5",
+  //           color: "#ffffff",
+  //           padding: "0.75rem 2rem",
+  //           borderRadius: "0.375rem",
+  //           fontSize: "1rem",
+  //           fontWeight: "600",
+  //         },
+  //       },
+  //     },
+  //   ],
+  // },
 };
 
 const layoutSlice = createSlice({
@@ -124,6 +166,13 @@ const layoutSlice = createSlice({
     resetDescriptiveSection: (state) => {
       state.descriptiveSection = initialState.descriptiveSection;
     },
+
+    // setParallaxSection: (state, action) => {
+    //   state.parallaxSection = action.payload;
+    // },
+    // resetParallaxSection: (state) => {
+    //   state.parallaxSection = initialState.parallaxSection;
+    // },
   },
 });
 
@@ -136,5 +185,7 @@ export const {
   resetFeatures,
   setDescriptiveSection,
   resetDescriptiveSection,
+  // setParallaxSection,
+  // resetParallaxSection,
 } = layoutSlice.actions;
 export default layoutSlice.reducer;
