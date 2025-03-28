@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import FeaturesPreview from "./FeaturePreview";
 import { useCreateLayoutMutation } from "@/redux/features/layout/layout.api";
 import DescriptiveSectionPreview from "./DescriptiveSectionPreview";
+import ParallaxSectionPreview from "./ParallaxSectionPreview";
 
 const Preview = () => {
   const [layoutNames, setLayoutNames] = useState("");
@@ -25,6 +26,7 @@ const Preview = () => {
     bannerComponent,
     featuresComponent,
     descriptiveSection,
+    parallaxSection,
   } = useAppSelector((state) => state.layout as any);
   const [createLayout, { isLoading }] = useCreateLayoutMutation();
 
@@ -35,6 +37,7 @@ const Preview = () => {
       ...(bannerComponent && { bannerComponent }),
       ...(featuresComponent && { featuresComponent }),
       ...(descriptiveSection && { descriptiveSection }),
+      ...(parallaxSection && { parallaxSection }),
     };
     try {
       const response = await createLayout(data).unwrap();
@@ -45,6 +48,14 @@ const Preview = () => {
       console.log(error);
     }
   };
+
+  // Check if any component exists
+  const hasAnyComponent =
+    navComponent ||
+    bannerComponent ||
+    featuresComponent ||
+    descriptiveSection ||
+    parallaxSection;
 
   return (
     <div className="shadow-lg shadow-blue-200 rounded-lg w-full">
@@ -67,7 +78,7 @@ const Preview = () => {
           </div>
         </div>
         <div className="border border-gray-200 rounded-md">
-          <div className="p-4 flex flex-col justify-center items-center min-h-32 bg-gray-100 rounded">
+          <div className="p-4 flex flex-col gap-10 justify-center items-center min-h-32 bg-gray-100 rounded">
             {/* Navbar */}
             {navComponent && <NavPreview navComponent={navComponent} />}
             {bannerComponent && (
@@ -78,15 +89,21 @@ const Preview = () => {
             )}
             {descriptiveSection && (
               <DescriptiveSectionPreview
-                sections={descriptiveSection.sections}
+                descriptiveSection={descriptiveSection}
               />
             )}
+            {parallaxSection && (
+              <ParallaxSectionPreview parallaxSection={parallaxSection} />
+            )}
           </div>
-          <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
-            <h1 className="text-2xl font-semibold text-gray-700">
-              Page Content Area
-            </h1>
-          </div>
+          {/* Only show Page Content Area if no components exist */}
+          {!hasAnyComponent && (
+            <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
+              <h1 className="text-2xl font-semibold text-gray-700">
+                Page Content Area
+              </h1>
+            </div>
+          )}
         </div>
       </div>
 
