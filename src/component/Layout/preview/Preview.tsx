@@ -25,7 +25,6 @@ const Preview = () => {
     bannerComponent,
     featuresComponent,
     descriptiveSection,
-    parallaxSection,
   } = useAppSelector((state) => state.layout as any);
   const [createLayout, { isLoading }] = useCreateLayoutMutation();
 
@@ -79,7 +78,7 @@ const Preview = () => {
             )}
             {descriptiveSection && (
               <DescriptiveSectionPreview
-                sections={descriptiveSection.sections}
+                descriptiveSection={descriptiveSection}
               />
             )}
             {/* {parallaxSection && (
