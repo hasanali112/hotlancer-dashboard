@@ -18,6 +18,8 @@ import FeaturesPreview from "./FeaturePreview";
 import { useCreateLayoutMutation } from "@/redux/features/layout/layout.api";
 import DescriptiveSectionPreview from "./DescriptiveSectionPreview";
 import ParallaxSectionPreview from "./ParallaxSectionPreview";
+import FormSectionPreview from "./FormSectionPreview";
+import FaqSectionPreview from "./FaqSectionPreview";
 
 const Preview = () => {
   const [layoutNames, setLayoutNames] = useState("");
@@ -27,6 +29,8 @@ const Preview = () => {
     featuresComponent,
     descriptiveSection,
     parallaxSection,
+    formSection,
+    faqSection,
   } = useAppSelector((state) => state.layout as any);
   const [createLayout, { isLoading }] = useCreateLayoutMutation();
 
@@ -38,6 +42,8 @@ const Preview = () => {
       ...(featuresComponent && { featuresComponent }),
       ...(descriptiveSection && { descriptiveSection }),
       ...(parallaxSection && { parallaxSection }),
+      ...(formSection && { formSection }),
+      ...(faqSection && { faqSection }),
     };
     try {
       const response = await createLayout(data).unwrap();
@@ -95,6 +101,9 @@ const Preview = () => {
             {parallaxSection && (
               <ParallaxSectionPreview parallaxSection={parallaxSection} />
             )}
+            {formSection && <FormSectionPreview formSection={formSection} />}
+
+            {faqSection && <FaqSectionPreview faqSection={faqSection} />}
           </div>
           {/* Only show Page Content Area if no components exist */}
           {!hasAnyComponent && (

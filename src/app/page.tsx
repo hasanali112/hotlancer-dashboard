@@ -1,19 +1,14 @@
 import Features from "@/component/Layout/CardFeatures/Features";
 import DescriptiveSection from "@/component/Layout/Descriptive/DescriptiveSection";
+import FaqSection from "@/component/Layout/FaqSection/FaqSection";
+import FormSection from "@/component/Layout/FormSection/FormSection";
 import Banner from "@/component/Layout/PageBannar/Banner";
 import PageNav from "@/component/Layout/PageNav/PageNav";
 import ParallaxSection from "@/component/Layout/Paralax/ParallaxSection";
 
 import Preview from "@/component/Layout/preview/Preview";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
+import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const tabList = [
@@ -40,6 +35,10 @@ const tabList = [
   {
     value: "forms",
     label: "Forms",
+  },
+  {
+    value: "faq",
+    label: "FAQ",
   },
 ];
 
@@ -112,16 +111,18 @@ const Home = () => {
             {/* forms */}
             <TabsContent value="forms">
               <Card>
-                <CardHeader>
-                  <CardTitle>Password</CardTitle>
-                  <CardDescription></CardDescription>
-                </CardHeader>
                 <CardContent className="space-y-2">
-                  <div>Forms content coming soon</div>
+                  <FormSection />
                 </CardContent>
-                <CardFooter>
-                  <Button>Save password</Button>
-                </CardFooter>
+              </Card>
+            </TabsContent>
+
+            {/* faq */}
+            <TabsContent value="faq">
+              <Card>
+                <CardContent className="space-y-2">
+                  <FaqSection />
+                </CardContent>
               </Card>
             </TabsContent>
           </Tabs>
