@@ -6,49 +6,9 @@ const initialState = {
   bannerComponent: {},
   featuresComponent: {},
   descriptiveSection: {
-    sections: [
-      {
-        images: [],
-        heading: "Heading Text",
-        subheading: "Subheading Text",
-        description: "Description text goes here",
-        styles: {
-          container: {
-            backgroundColor: "#ffffff",
-            padding: "2rem",
-            margin: "0 auto",
-            maxWidth: "1200px",
-          },
-          content: {
-            textAlign: "left",
-          },
-          heading: {
-            color: "#000000",
-            fontSize: "2rem",
-            fontWeight: "700",
-            marginBottom: "1rem",
-          },
-          subheading: {
-            color: "#666666",
-            fontSize: "1.25rem",
-            fontWeight: "500",
-            marginBottom: "0.5rem",
-          },
-          description: {
-            color: "#333333",
-            fontSize: "1rem",
-            lineHeight: "1.5",
-          },
-          imageContainer: {
-            borderRadius: "0.5rem",
-            overflow: "hidden",
-            boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-          },
-        },
-        layout: "image-left", // 'image-left' or 'image-right'
-      },
-    ],
+    sections: [],
   },
+  parallaxSection: {},
 };
 
 const layoutSlice = createSlice({
@@ -83,6 +43,13 @@ const layoutSlice = createSlice({
     resetDescriptiveSection: (state) => {
       state.descriptiveSection = initialState.descriptiveSection;
     },
+
+    setParallaxSection: (state, action) => {
+      state.parallaxSection = action.payload;
+    },
+    resetParallaxSection: (state) => {
+      state.parallaxSection = initialState.parallaxSection;
+    },
   },
 });
 
@@ -95,5 +62,7 @@ export const {
   resetFeatures,
   setDescriptiveSection,
   resetDescriptiveSection,
+  setParallaxSection,
+  resetParallaxSection,
 } = layoutSlice.actions;
 export default layoutSlice.reducer;

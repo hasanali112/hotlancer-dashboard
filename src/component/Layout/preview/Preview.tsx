@@ -78,9 +78,12 @@ const Preview = () => {
             )}
             {descriptiveSection && (
               <DescriptiveSectionPreview
-                sections={descriptiveSection.sections}
+                descriptiveSection={descriptiveSection}
               />
             )}
+            {/* {parallaxSection && (
+              <ParallaxSectionPreview sections={parallaxSection.sections} />
+            )} */}
           </div>
           <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
             <h1 className="text-2xl font-semibold text-gray-700">

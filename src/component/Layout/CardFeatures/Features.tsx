@@ -23,8 +23,6 @@ const Features = () => {
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [isAddingNew, setIsAddingNew] = useState(false);
 
-  // Default new card configuration
-
   // Add a new card
   const addNewCard = () => {
     const newCard = getDefaultCard();

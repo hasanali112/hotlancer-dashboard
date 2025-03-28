@@ -32,6 +32,10 @@ const tabList = [
     value: "descriptive",
     label: "Descriptive",
   },
+  // {
+  //   value: "parallax",
+  //   label: "Parallax",
+  // },
   {
     value: "forms",
     label: "Forms",
@@ -95,6 +99,14 @@ const Home = () => {
                 </CardContent>
               </Card>
             </TabsContent>
+
+            {/* <TabsContent value="parallax">
+              <Card>
+                <CardContent className="space-y-2">
+                  <ParallaxSection />
+                </CardContent>
+              </Card>
+            </TabsContent> */}
 
             {/* forms */}
             <TabsContent value="forms">
