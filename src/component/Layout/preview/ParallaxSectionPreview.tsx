@@ -1,86 +1,49 @@
-// /* eslint-disable @typescript-eslint/no-explicit-any */
-// "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-// import React from "react";
+import React from "react";
 
-// const ParallaxSectionPreview = ({ sections }: { sections: any[] }) => {
-//    if (!sections || sections.length === 0) {
-//     return (
-//       <div className="text-center py-8 text-gray-500">
-//         No parallax sections configured yet
-//       </div>
-//     );
-//   }
-//   return (
-//     <div className="w-full">
-//       {sections.map((section, index) => (
-//         <div
-//           key={index}
-//           className="relative flex items-center justify-center bg-cover bg-fixed bg-center"
-//           style={{
-//             height: section.styles.container.height,
-//             padding: section.styles.container.padding,
-//             backgroundImage: `url(${section.backgroundImage})`,
-//           }}
-//         >
-//           {/* Overlay */}
-//           <div
-//             className="absolute inset-0"
-//             style={{
-//               backgroundColor: section.overlayColor,
-//             }}
-//           />
+const ParallaxSectionPreview = ({
+  parallaxSection,
+}: {
+  parallaxSection: any;
+}) => {
+  if (!parallaxSection || Object.keys(parallaxSection).length === 0) {
+    return null;
+  }
 
-//           {/* Content */}
-//           <div
-//             className="relative z-10"
-//             style={{
-//               maxWidth: section.styles.content.maxWidth,
-//               textAlign: section.styles.content.textAlign as any,
-//             }}
-//           >
-//             <h2
-//               style={{
-//                 color: section.styles.title.color,
-//                 fontSize: section.styles.title.fontSize,
-//                 fontWeight: section.styles.title.fontWeight,
-//                 marginBottom: section.styles.title.marginBottom,
-//               }}
-//             >
-//               {section.title}
-//             </h2>
-//             {section.subtitle && (
-//               <h3
-//                 style={{
-//                   color: section.styles.subtitle.color,
-//                   fontSize: section.styles.subtitle.fontSize,
-//                   fontWeight: section.styles.subtitle.fontWeight,
-//                   marginBottom: section.styles.subtitle.marginBottom,
-//                 }}
-//               >
-//                 {section.subtitle}
-//               </h3>
-//             )}
-//             {section.buttonText && (
-//               <button
-//                 style={{
-//                   backgroundColor: section.styles.button.backgroundColor,
-//                   color: section.styles.button.color,
-//                   padding: section.styles.button.padding,
-//                   borderRadius: section.styles.button.borderRadius,
-//                   fontSize: section.styles.button.fontSize,
-//                   fontWeight: section.styles.button.fontWeight,
-//                 }}
-//                 className="hover:opacity-90 transition-opacity"
-//               >
-//                 {section.buttonText}
-//               </button>
-//             )}
-//           </div>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
+  return (
+    <div
+      className={`relative w-full flex items-center justify-${
+        parallaxSection.textPosition
+      } bg-cover bg-center ${parallaxSection.parallaxEffect ? "bg-fixed" : ""}`}
+      style={{
+        height: parallaxSection.height,
+        backgroundImage: parallaxSection.image
+          ? `url(${parallaxSection.image})`
+          : "none",
+      }}
+    >
+      {parallaxSection.image && (
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: parallaxSection.overlayColor }}
+        ></div>
+      )}
+      <div
+        className={`relative z-10 p-8 text-${parallaxSection.textAlignment} w-full`}
+        style={{ color: parallaxSection.textColor, maxWidth: "1200px" }}
+      >
+        {parallaxSection.heading && (
+          <h2 className="text-4xl font-bold mb-4">{parallaxSection.heading}</h2>
+        )}
+        {parallaxSection.subheading && (
+          <h3 className="text-2xl font-semibold">
+            {parallaxSection.subheading}
+          </h3>
+        )}
+      </div>
+    </div>
+  );
+};
 
-// export default ParallaxSectionPreview;
+export default ParallaxSectionPreview;
