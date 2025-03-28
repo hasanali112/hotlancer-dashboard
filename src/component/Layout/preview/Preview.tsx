@@ -18,6 +18,7 @@ import FeaturesPreview from "./FeaturePreview";
 import { useCreateLayoutMutation } from "@/redux/features/layout/layout.api";
 import DescriptiveSectionPreview from "./DescriptiveSectionPreview";
 import ParallaxSectionPreview from "./ParallaxSectionPreview";
+import FormSectionPreview from "./FormSectionPreview";
 
 const Preview = () => {
   const [layoutNames, setLayoutNames] = useState("");
@@ -27,6 +28,7 @@ const Preview = () => {
     featuresComponent,
     descriptiveSection,
     parallaxSection,
+    formSection,
   } = useAppSelector((state) => state.layout as any);
   const [createLayout, { isLoading }] = useCreateLayoutMutation();
 
@@ -38,6 +40,7 @@ const Preview = () => {
       ...(featuresComponent && { featuresComponent }),
       ...(descriptiveSection && { descriptiveSection }),
       ...(parallaxSection && { parallaxSection }),
+      ...(formSection && { formSection }),
     };
     try {
       const response = await createLayout(data).unwrap();
@@ -87,6 +90,7 @@ const Preview = () => {
             {parallaxSection && (
               <ParallaxSectionPreview parallaxSection={parallaxSection} />
             )}
+            {formSection && <FormSectionPreview formSection={formSection} />}
           </div>
           <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
             <h1 className="text-2xl font-semibold text-gray-700">
