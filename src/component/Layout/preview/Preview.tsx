@@ -20,6 +20,7 @@ import DescriptiveSectionPreview from "./DescriptiveSectionPreview";
 import ParallaxSectionPreview from "./ParallaxSectionPreview";
 import FormSectionPreview from "./FormSectionPreview";
 import FaqSectionPreview from "./FaqSectionPreview";
+import FooterSectionPreview from "./FooterSectionPreview";
 
 const Preview = () => {
   const [layoutNames, setLayoutNames] = useState("");
@@ -31,6 +32,7 @@ const Preview = () => {
     parallaxSection,
     formSection,
     faqSection,
+    footerSection,
   } = useAppSelector((state) => state.layout as any);
   const [createLayout, { isLoading }] = useCreateLayoutMutation();
 
@@ -44,6 +46,7 @@ const Preview = () => {
       ...(parallaxSection && { parallaxSection }),
       ...(formSection && { formSection }),
       ...(faqSection && { faqSection }),
+      ...(footerSection && { footerSection }),
     };
     try {
       const response = await createLayout(data).unwrap();
@@ -96,6 +99,9 @@ const Preview = () => {
             {formSection && <FormSectionPreview formSection={formSection} />}
 
             {faqSection && <FaqSectionPreview faqSection={faqSection} />}
+            {footerSection && (
+              <FooterSectionPreview footerSection={footerSection} />
+            )}
           </div>
           <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
             <h1 className="text-2xl font-semibold text-gray-700">
