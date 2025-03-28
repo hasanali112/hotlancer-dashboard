@@ -13,9 +13,13 @@ const ParallaxSectionPreview = ({
 
   return (
     <div
-      className={`relative w-full flex items-center justify-${
-        parallaxSection.textPosition
-      } bg-cover bg-center ${parallaxSection.parallaxEffect ? "bg-fixed" : ""}`}
+      className={`relative w-full flex items-center rounded-lg justify ${
+        !parallaxSection || Object.keys(parallaxSection).length === 0
+          ? ""
+          : " mt-12"
+      } ${parallaxSection.textPosition} bg-cover bg-center ${
+        parallaxSection.parallaxEffect ? "bg-fixed" : ""
+      }`}
       style={{
         height: parallaxSection.height,
         backgroundImage: parallaxSection.image
