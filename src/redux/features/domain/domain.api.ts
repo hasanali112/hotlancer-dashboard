@@ -4,11 +4,11 @@ const domainApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createDomain: builder.mutation({
       query: (data) => ({
-        url: "/create-component",
+        url: "/create-domain",
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["component"],
+      invalidatesTags: ["domain"],
     }),
     getDomain: builder.query({
       query: (arg) => ({
@@ -16,7 +16,7 @@ const domainApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      providesTags: ["component"],
+      providesTags: ["domain"],
     }),
   }),
 });

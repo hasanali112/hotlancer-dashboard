@@ -67,7 +67,7 @@ type StyleElements = {
   content: {
     textAlign: string;
   };
-  heading: {
+  title: {
     color: string;
     fontSize: string;
     fontWeight: string;
@@ -132,4 +132,27 @@ export interface DescriptiveSection {
     };
   };
   layout: string;
+}
+
+export interface ICardConfig {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  backgroundColor: string;
+  textColor: string;
+  borderColor: string;
+  borderRadius: string;
+  padding: string;
+  margin: string;
+  gap: string;
+  flexDirection: string;
+  justifyContent: string;
+  alignItems: string;
+  titleSize: string;
+  descriptionSize: string;
+  fontFamily: string;
+  titleWeight: string;
+  descriptionWeight: string;
+  borderWidth: string;
 }
