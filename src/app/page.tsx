@@ -2,6 +2,7 @@ import Features from "@/component/Layout/CardFeatures/Features";
 import DescriptiveSection from "@/component/Layout/Descriptive/DescriptiveSection";
 import Banner from "@/component/Layout/PageBannar/Banner";
 import PageNav from "@/component/Layout/PageNav/PageNav";
+import ParallaxSection from "@/component/Layout/Paralax/ParallaxSection";
 
 import Preview from "@/component/Layout/preview/Preview";
 import { Button } from "@/components/ui/button";
@@ -32,10 +33,10 @@ const tabList = [
     value: "descriptive",
     label: "Descriptive",
   },
-  // {
-  //   value: "parallax",
-  //   label: "Parallax",
-  // },
+  {
+    value: "parallax",
+    label: "Parallax",
+  },
   {
     value: "forms",
     label: "Forms",
@@ -100,13 +101,13 @@ const Home = () => {
               </Card>
             </TabsContent>
 
-            {/* <TabsContent value="parallax">
+            <TabsContent value="parallax">
               <Card>
                 <CardContent className="space-y-2">
                   <ParallaxSection />
                 </CardContent>
               </Card>
-            </TabsContent> */}
+            </TabsContent>
 
             {/* forms */}
             <TabsContent value="forms">

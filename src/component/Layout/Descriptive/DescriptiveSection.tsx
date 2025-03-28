@@ -117,7 +117,7 @@ const DescriptiveSection = () => {
       </div>
       <hr className="my-4 border border-gray-400 border-dashed" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
         {/* Images Configuration */}
         <div className="space-y-4">
           <h3 className="text-lg font-semibold text-gray-700">Images</h3>
@@ -359,11 +359,11 @@ const DescriptiveSection = () => {
           {/* Text Column */}
           <div className="flex-1" style={{ color: sectionConfig.textColor }}>
             {sectionConfig.heading ? (
-              <h2 className="text-3xl font-bold mb-4">
+              <h2 className="text-3xl font-bold mb-3">
                 {sectionConfig.heading}
               </h2>
             ) : (
-              <div className="h-8 bg-gray-200 rounded mb-4"></div>
+              <div className="h-8 bg-gray-200 rounded mb-3"></div>
             )}
 
             {sectionConfig.subheading ? (
