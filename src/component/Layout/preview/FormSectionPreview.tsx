@@ -12,7 +12,11 @@ const FormSectionPreview = ({ formSection }: { formSection: any }) => {
 
   return (
     <div
-      className="w-full p-6 rounded-lg"
+      className={`w-full rounded-lg ${
+        !formSection || Object.keys(formSection).length === 0
+          ? ""
+          : "p-12 mt-12"
+      }`}
       style={{
         backgroundColor: formSection.styles.bgColor,
         padding: formSection.styles.padding,

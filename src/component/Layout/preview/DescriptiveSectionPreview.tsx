@@ -13,7 +13,11 @@ const DescriptiveSectionPreview = ({
 
   return (
     <div
-      className="w-full py-12 px-4"
+      className={`w-full  ${
+        !descriptiveSection || Object.keys(descriptiveSection).length === 0
+          ? "pt-12 "
+          : " p-4"
+      }`}
       style={{ backgroundColor: descriptiveSection.backgroundColor }}
     >
       <div
