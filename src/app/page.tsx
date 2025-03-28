@@ -1,6 +1,7 @@
 import Features from "@/component/Layout/CardFeatures/Features";
 import DescriptiveSection from "@/component/Layout/Descriptive/DescriptiveSection";
 import FaqSection from "@/component/Layout/FaqSection/FaqSection";
+import FooterSection from "@/component/Layout/FooterSection/FooterSection";
 import FormSection from "@/component/Layout/FormSection/FormSection";
 import Banner from "@/component/Layout/PageBannar/Banner";
 import PageNav from "@/component/Layout/PageNav/PageNav";
@@ -39,6 +40,10 @@ const tabList = [
   {
     value: "faq",
     label: "FAQ",
+  },
+  {
+    value: "footer",
+    label: "Footer",
   },
 ];
 
@@ -122,6 +127,15 @@ const Home = () => {
               <Card>
                 <CardContent className="space-y-2">
                   <FaqSection />
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* footer*/}
+            <TabsContent value="footer">
+              <Card>
+                <CardContent className="space-y-2">
+                  <FooterSection />
                 </CardContent>
               </Card>
             </TabsContent>
