@@ -9,6 +9,7 @@ const initialState = {
     sections: [],
   },
   parallaxSection: {},
+  formSection: {},
 };
 
 const layoutSlice = createSlice({
@@ -50,6 +51,13 @@ const layoutSlice = createSlice({
     resetParallaxSection: (state) => {
       state.parallaxSection = initialState.parallaxSection;
     },
+
+    setFormSection: (state, action) => {
+      state.formSection = action.payload;
+    },
+    resetFormSection: (state) => {
+      state.formSection = initialState.formSection;
+    },
   },
 });
 
@@ -64,5 +72,7 @@ export const {
   resetDescriptiveSection,
   setParallaxSection,
   resetParallaxSection,
+  setFormSection,
+  resetFormSection,
 } = layoutSlice.actions;
 export default layoutSlice.reducer;

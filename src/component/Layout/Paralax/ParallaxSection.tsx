@@ -16,13 +16,13 @@ const ParallaxSection = () => {
   // Section configuration
   const [sectionConfig, setSectionConfig] = useState({
     image: "",
-    overlayColor: "rgba(0, 0, 0, 0.5)",
+    overlayColor: "",
     textColor: "#ffffff",
     heading: "",
     subheading: "",
     height: "400px",
-    textPosition: "center", // 'center', 'left', 'right'
-    textAlignment: "center", // 'center', 'left', 'right'
+    textPosition: "center",
+    textAlignment: "center",
     parallaxEffect: true,
   });
 
