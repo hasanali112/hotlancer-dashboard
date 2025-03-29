@@ -1,68 +1,88 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+interface Feature {
+  alignItems?: string;
+  backgroundColor?: string;
+  borderColor?: string;
+  borderRadius?: string;
+  borderWidth?: string;
+  description?: string;
+  descriptionSize?: string;
+  descriptionWeight?: string;
+  flexDirection?: string;
+  fontFamily?: string;
+  gap?: string;
+  icon?: string;
+  justifyContent?: string;
+  margin?: string;
+  padding?: string;
+  textColor?: string;
+  title?: string;
+  titleSize?: string;
+  titleWeight?: string;
+}
+
 const FeaturesPreview = ({
   featuresComponent,
 }: {
-  featuresComponent: any[];
+  featuresComponent: Feature[];
 }) => {
-  // If no features provided, return null or a message
   if (!featuresComponent || featuresComponent.length === 0) {
     return <div className="text-center p-4">No features to display</div>;
   }
 
   return (
     <div className="flex flex-wrap justify-center">
-      {featuresComponent.map((feature, index) => {
-        // Destructure with default values for each feature
-        const {
-          alignItems = "items-center",
-          backgroundColor = "#ffffff",
-          borderColor = "#e2e8f0",
-          borderRadius = "rounded",
-          borderWidth = "border",
-          description = "Feature description goes here.",
-          descriptionSize = "text-base",
-          descriptionWeight = "font-normal",
-          flexDirection = "flex-col",
-          fontFamily = "font-sans",
-          gap = "gap-4",
-          icon = "🌟",
-          justifyContent = "justify-center",
-          margin = "m-2",
-          padding = "p-4",
-          textColor = "#333333",
-          title = "Feature Title",
-          titleSize = "text-xl",
-          titleWeight = "font-bold",
-          id = `feature-${index}`, // Add a fallback ID
-        } = feature || {};
+      {featuresComponent.length > 0 &&
+        featuresComponent.map((feature, index) => {
+          const {
+            alignItems,
+            backgroundColor,
+            borderColor,
+            borderRadius,
+            borderWidth,
+            description,
+            descriptionSize,
+            descriptionWeight,
+            flexDirection,
+            fontFamily,
+            gap,
+            icon,
+            justifyContent,
+            margin,
+            padding,
+            textColor,
+            title,
+            titleSize,
+            titleWeight,
+          } = feature;
 
-        return (
-          <div key={id} className={`${margin}`}>
-            <div
-              className={`flex ${flexDirection} ${gap} ${padding} ${borderWidth} ${borderRadius} ${fontFamily} ${alignItems} ${justifyContent} h-full`}
-              style={{
-                backgroundColor,
-                borderColor,
-                color: textColor,
-              }}
-            >
-              {icon && <div className={`${titleSize}`}>{icon}</div>}
-              <div className={`text-center ${gap}`}>
-                {title && (
-                  <h3 className={`${titleSize} ${titleWeight}`}>{title}</h3>
-                )}
-                {description && (
-                  <p className={`${descriptionSize} ${descriptionWeight}`}>
-                    {description}
-                  </p>
-                )}
+          return (
+            <div key={index || title} className={margin}>
+              <div
+                className={`flex ${flexDirection} ${gap} ${padding} ${borderWidth} ${borderRadius} ${fontFamily} ${alignItems} ${justifyContent} h-full`}
+                style={{
+                  backgroundColor,
+                  borderColor,
+                  color: textColor,
+                }}
+              >
+                {icon && <div className={titleSize}>{icon}</div>}
+                <div className={`text-center ${gap}`}>
+                  {title && (
+                    <h3 className={`${titleSize} ${titleWeight}`}>{title}</h3>
+                  )}
+                  {description && (
+                    <p className={`${descriptionSize} ${descriptionWeight}`}>
+                      {description}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </div>
   );
 };

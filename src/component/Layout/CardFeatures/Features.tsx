@@ -18,7 +18,10 @@ import {
 } from "./Features.contant";
 import { PlusIcon } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { setFeatures } from "@/redux/features/layout/layoutSlice";
+import {
+  resetFeatures,
+  setFeatures,
+} from "@/redux/features/layout/layoutSlice";
 
 const Features = () => {
   const [cards, setCards] = useState<ICardConfig[]>([]);
@@ -75,6 +78,7 @@ const Features = () => {
 
   const handleReset = () => {
     // Reset the layout configuration
+    dispatch(resetFeatures());
     // ...
   };
 

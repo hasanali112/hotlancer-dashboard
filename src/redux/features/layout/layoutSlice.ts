@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   navComponent: {},
   bannerComponent: {},
-  featuresComponent: {},
+  featuresComponent: [],
   descriptiveSection: {
     sections: [],
   },
@@ -37,7 +37,7 @@ const layoutSlice = createSlice({
     },
 
     resetFeatures: (state) => {
-      state.featuresComponent = {};
+      state.featuresComponent = [];
     },
 
     setDescriptiveSection: (state, action) => {
