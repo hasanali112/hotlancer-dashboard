@@ -49,31 +49,33 @@ const LayoutDetails = ({ layout }: { layout: any }) => {
 
     return (
       <div
-        className="p-4 mb-4 rounded"
+        className={`p-4 mb-4 rounded ${
+          navComponent.navStyles?.flexDirection || "flex"
+        } ${navComponent.navStyles?.justifyContent || "justify-between"} ${
+          navComponent.navStyles?.alignItems || "items-center"
+        } ${navComponent.navStyles?.gap || "gap-4"}`}
         style={{
           backgroundColor: navComponent.colors?.backgroundColor || "#f0f4f8",
           color: navComponent.colors?.textColor || "#333333",
         }}
       >
-        <div className="flex justify-between items-center">
-          <div className="font-bold">
-            {navComponent.brandType === "image" && navComponent.brandImage ? (
-              <Image
-                src={navComponent.brandImage}
-                alt="Brand Logo"
-                width={100}
-                height={40}
-                className="h-10 object-contain"
-              />
-            ) : (
-              navComponent.brand
-            )}
-          </div>
-          <div className="flex gap-4">
-            {navComponent.items?.map((item: any, index: number) => (
-              <div key={index}>{item.label}</div>
-            ))}
-          </div>
+        <div className="font-bold">
+          {navComponent.brandType === "image" && navComponent.brandImage ? (
+            <Image
+              src={navComponent.brandImage}
+              alt="Brand Logo"
+              width={100}
+              height={40}
+              className="h-10 object-contain"
+            />
+          ) : (
+            navComponent.brand
+          )}
+        </div>
+        <div className="flex gap-4">
+          {navComponent.items?.map((item: any, index: number) => (
+            <div key={index}>{item.label}</div>
+          ))}
         </div>
       </div>
     );
@@ -85,49 +87,45 @@ const LayoutDetails = ({ layout }: { layout: any }) => {
 
     return (
       <div
-        className="p-4 mb-4 rounded"
+        className={`p-4 mb-4 rounded ${
+          bannerComponent.styles?.padding || "p-6"
+        } ${bannerComponent.styles?.flexDirection || "flex-col"} ${
+          bannerComponent.styles?.justifyContent || "justify-center"
+        } ${bannerComponent.styles?.alignItems || "items-center"} ${
+          bannerComponent.styles?.gap || "gap-6"
+        } ${bannerComponent.styles?.fontFamily || "font-sans"}`}
         style={{
           backgroundColor: bannerComponent.colors?.backgroundColor || "#f0f4f8",
           color: bannerComponent.colors?.textColor || "#333333",
         }}
       >
-        <div
-          className={`flex ${
-            bannerComponent.styles?.flexDirection === "flex-row"
-              ? "flex-row"
-              : "flex-col"
-          } gap-6 items-center`}
-        >
-          <div>
-            <h3
-              className={`${
-                bannerComponent.styles?.headingSize || "text-3xl"
-              } ${bannerComponent.styles?.headingWeight || "font-bold"} ${
-                bannerComponent.styles?.headingAlign || "text-center"
-              }`}
-            >
-              {bannerComponent.heading}
-            </h3>
-            <p
-              className={`${
-                bannerComponent.styles?.contentSize || "text-base"
-              } ${bannerComponent.styles?.contentAlign || "text-center"}`}
-            >
-              {bannerComponent.content}
-            </p>
-          </div>
-          {bannerComponent.showImage && bannerComponent.imageUrl && (
-            <div className="mt-2">
-              <Image
-                src={bannerComponent.imageUrl}
-                alt="Banner"
-                width={400}
-                height={200}
-                className="w-full h-32 object-cover rounded"
-              />
-            </div>
-          )}
+        <div>
+          <h3
+            className={`${bannerComponent.styles?.headingSize || "text-3xl"} ${
+              bannerComponent.styles?.headingWeight || "font-bold"
+            } ${bannerComponent.styles?.headingAlign || "text-center"}`}
+          >
+            {bannerComponent.heading}
+          </h3>
+          <p
+            className={`${bannerComponent.styles?.contentSize || "text-base"} ${
+              bannerComponent.styles?.contentAlign || "text-center"
+            }`}
+          >
+            {bannerComponent.content}
+          </p>
         </div>
+        {bannerComponent.showImage && bannerComponent.imageUrl && (
+          <div className="mt-2">
+            <Image
+              src={bannerComponent.imageUrl}
+              alt="Banner"
+              width={400}
+              height={200}
+              className="w-full h-32 object-cover rounded"
+            />
+          </div>
+        )}
       </div>
     );
   };
@@ -145,34 +143,30 @@ const LayoutDetails = ({ layout }: { layout: any }) => {
               key={index}
               className={`p-4 rounded ${feature.borderWidth || "border"} ${
                 feature.borderRadius || "rounded"
-              }`}
+              } ${feature.padding || "p-4"} ${feature.margin || "m-2"} ${
+                feature.flexDirection || "flex-col"
+              } ${feature.justifyContent || "justify-center"} ${
+                feature.alignItems || "items-center"
+              } ${feature.gap || "gap-4"} ${feature.fontFamily || "font-sans"}`}
               style={{
                 backgroundColor: feature.backgroundColor || "#ffffff",
                 color: feature.textColor || "#333333",
                 borderColor: feature.borderColor || "#e2e8f0",
               }}
             >
-              <div
-                className={`flex ${feature.flexDirection || "flex-col"} ${
-                  feature.justifyContent || "justify-center"
-                } ${feature.alignItems || "items-center"} ${
-                  feature.gap || "gap-4"
-                }`}
-              >
-                <div className="text-2xl">{feature.icon || "🚀"}</div>
-                <div>
-                  <h4
-                    className={`${feature.titleSize || "text-xl"} ${
-                      feature.titleWeight || "font-bold"
-                    }`}
-                  >
-                    {feature.title || "Feature Title"}
-                  </h4>
-                  <p className={`${feature.descriptionSize || "text-base"}`}>
-                    {feature.description?.substring(0, 50) ||
-                      "Feature description goes here..."}
-                  </p>
-                </div>
+              <div className="text-2xl">{feature.icon || "🚀"}</div>
+              <div>
+                <h4
+                  className={`${feature.titleSize || "text-xl"} ${
+                    feature.titleWeight || "font-bold"
+                  }`}
+                >
+                  {feature.title || "Feature Title"}
+                </h4>
+                <p className={`${feature.descriptionSize || "text-base"}`}>
+                  {feature.description?.substring(0, 50) ||
+                    "Feature description goes here..."}
+                </p>
               </div>
             </div>
           ))}
@@ -191,7 +185,9 @@ const LayoutDetails = ({ layout }: { layout: any }) => {
                 key={index}
                 className={`p-4 rounded ${
                   card.styles?.card?.borderWidth || "border"
-                } ${card.styles?.card?.borderRadius || "rounded"}`}
+                } ${card.styles?.card?.borderRadius || "rounded"} ${
+                  card.styles?.card?.padding || "p-4"
+                }`}
                 style={{
                   backgroundColor:
                     card.styles?.card?.backgroundColor || "#ffffff",
@@ -232,32 +228,28 @@ const LayoutDetails = ({ layout }: { layout: any }) => {
 
     return (
       <div
-        className="p-4 mb-4 rounded"
+        className={`p-4 mb-4 rounded ${
+          section.alignment === "left" ? "text-left" : "text-center"
+        }`}
         style={{
           backgroundColor: section.backgroundColor || "#ffffff",
           color: section.textColor || "#333333",
         }}
       >
-        <div
-          className={`flex flex-col ${
-            section.alignment === "left" ? "items-start" : "items-center"
-          } gap-4`}
-        >
-          {section.images?.[0] && (
-            <Image
-              src={section.images[0]}
-              alt="Descriptive section"
-              width={400}
-              height={300}
-              className="w-full h-48 object-cover rounded"
-            />
-          )}
-          <h3 className="text-2xl font-bold">{section.heading}</h3>
-          {section.subheading && (
-            <h4 className="text-xl">{section.subheading}</h4>
-          )}
-          <p>{section.description}</p>
-        </div>
+        {section.images?.[0] && (
+          <Image
+            src={section.images[0]}
+            alt="Descriptive section"
+            width={400}
+            height={300}
+            className="w-full h-48 object-cover rounded mb-4"
+          />
+        )}
+        <h3 className="text-2xl font-bold">{section.heading}</h3>
+        {section.subheading && (
+          <h4 className="text-xl">{section.subheading}</h4>
+        )}
+        <p>{section.description}</p>
       </div>
     );
   };
@@ -268,7 +260,9 @@ const LayoutDetails = ({ layout }: { layout: any }) => {
 
     return (
       <div
-        className="relative mb-4 rounded overflow-hidden"
+        className={`relative mb-4 rounded overflow-hidden ${
+          section.parallaxEffect ? "bg-fixed" : ""
+        }`}
         style={{
           height: section.height || "400px",
         }}
@@ -282,11 +276,12 @@ const LayoutDetails = ({ layout }: { layout: any }) => {
           />
         )}
         <div
-          className="absolute inset-0 flex items-center justify-center p-4"
+          className={`absolute inset-0 flex items-center justify-center p-4 ${
+            section.textPosition === "center" ? "text-center" : "text-left"
+          }`}
           style={{
             backgroundColor: section.overlayColor || "rgba(0,0,0,0.5)",
             color: section.textColor || "#ffffff",
-            textAlign: section.textAlignment || "center",
           }}
         >
           <div>
@@ -306,13 +301,9 @@ const LayoutDetails = ({ layout }: { layout: any }) => {
 
     return (
       <div
-        className="p-4 mb-4 rounded"
-        style={{
-          backgroundColor: section.styles?.bgColor || "#ffffff",
-          color: section.styles?.textColor || "#333333",
-          padding: section.styles?.padding || "1.5rem",
-          borderRadius: section.styles?.borderRadius || "0.5rem",
-        }}
+        className={`p-4 mb-4 rounded ${section.styles?.padding || "p-6"} ${
+          section.styles?.borderRadius || "rounded-md"
+        }`}
       >
         <h3 className="text-xl font-bold mb-4">Contact Form</h3>
         {section.fields?.slice(0, 2).map((field: any) => (
@@ -321,20 +312,16 @@ const LayoutDetails = ({ layout }: { layout: any }) => {
             <input
               type={field.type}
               placeholder={field.placeholder}
-              className="w-full p-2 border rounded"
-              style={{
-                backgroundColor: field.styles?.bgColor || "#ffffff",
-                borderColor: field.styles?.borderColor || "#d1d5db",
-              }}
+              className={`w-full p-2 border rounded ${
+                field.styles?.fontSize || "text-base"
+              }`}
             />
           </div>
         ))}
         <button
-          className="px-4 py-2 rounded"
-          style={{
-            backgroundColor: section.styles?.buttonBgColor || "#3b82f6",
-            color: section.styles?.buttonTextColor || "#ffffff",
-          }}
+          className={`px-4 py-2 rounded ${
+            section.styles?.buttonBgColor || "bg-blue-500"
+          } ${section.styles?.buttonTextColor || "text-white"}`}
         >
           {section.submitText || "Submit"}
         </button>
@@ -348,31 +335,21 @@ const LayoutDetails = ({ layout }: { layout: any }) => {
 
     return (
       <div
-        className="p-4 mb-4 rounded"
-        style={{
-          backgroundColor: section.styles?.bgColor || "#ffffff",
-          padding: section.styles?.padding || "1.5rem",
-          borderRadius: section.styles?.borderRadius || "0.5rem",
-        }}
+        className={`p-4 mb-4 rounded ${section.styles?.padding || "p-6"} ${
+          section.styles?.borderRadius || "rounded-md"
+        }`}
       >
         <h3 className="text-xl font-bold mb-4">FAQs</h3>
         {section.items?.slice(0, 2).map((item: any) => (
           <div key={item.id} className="mb-4">
             <h4
-              className="font-semibold mb-1"
-              style={{
-                color: item.styles?.questionColor || "#1a1a1a",
-                fontSize: item.styles?.questionFontSize || "1.125rem",
-              }}
+              className={`font-semibold mb-1 ${
+                item.styles?.questionFontSize || "text-lg"
+              }`}
             >
               {item.question}
             </h4>
-            <p
-              style={{
-                color: item.styles?.answerColor || "#4a5568",
-                fontSize: item.styles?.answerFontSize || "1rem",
-              }}
-            >
+            <p className={`${item.styles?.answerFontSize || "text-base"}`}>
               {item.answer}
             </p>
           </div>
@@ -387,12 +364,9 @@ const LayoutDetails = ({ layout }: { layout: any }) => {
 
     return (
       <div
-        className="p-4 rounded"
-        style={{
-          backgroundColor: section.styles?.bgColor || "#1e293b",
-          color: section.styles?.textColor || "#e2e8f0",
-          padding: section.styles?.padding || "2rem",
-        }}
+        className={`p-4 rounded ${section.styles?.padding || "p-8"} ${
+          section.styles?.gap || "gap-8"
+        }`}
       >
         <div className="flex justify-between items-center">
           <div>
@@ -406,13 +380,20 @@ const LayoutDetails = ({ layout }: { layout: any }) => {
             ) : (
               <div>
                 <div
-                  className="text-xl font-bold"
-                  style={{ color: section.styles?.headingColor || "#ffffff" }}
+                  className={`text-xl font-bold ${
+                    section.styles?.headingColor || "text-white"
+                  }`}
                 >
                   {section.logo?.text || "My Site"}
                 </div>
                 {section.logo?.subtext && (
-                  <div className="text-sm">{section.logo.subtext}</div>
+                  <div
+                    className={`text-sm ${
+                      section.styles?.textColor || "text-gray-300"
+                    }`}
+                  >
+                    {section.logo.subtext}
+                  </div>
                 )}
               </div>
             )}
@@ -440,7 +421,7 @@ const LayoutDetails = ({ layout }: { layout: any }) => {
           <EyeIcon className="h-4 w-4 mr-2" /> View Details
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[700px] h-[600px] overflow-y-auto">
+      <DialogContent className="sm:max-w-[900px] h-[600px] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-xl">
             {layout?.layoutName || "Layout Details"}
