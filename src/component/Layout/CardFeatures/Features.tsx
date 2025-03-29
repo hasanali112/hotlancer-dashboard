@@ -17,11 +17,18 @@ import {
   paddingOptions,
 } from "./Features.contant";
 import { PlusIcon } from "lucide-react";
+import { useDispatch } from "react-redux";
+import {
+  resetFeatures,
+  setFeatures,
+} from "@/redux/features/layout/layoutSlice";
 
 const Features = () => {
   const [cards, setCards] = useState<ICardConfig[]>([]);
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [isAddingNew, setIsAddingNew] = useState(false);
+
+  const dispatch = useDispatch();
 
   // Add a new card
   const addNewCard = () => {
@@ -63,6 +70,18 @@ const Features = () => {
     setIsAddingNew(false);
   };
 
+  const handleSaveLayout = () => {
+    // Save the layout configuration to Redux store
+    dispatch(setFeatures(cards));
+    // ...
+  };
+
+  const handleReset = () => {
+    // Reset the layout configuration
+    dispatch(resetFeatures());
+    // ...
+  };
+
   return (
     <div className="w-full p-4">
       {/* Configuration Panel */}
@@ -72,10 +91,16 @@ const Features = () => {
             Features Configuration
           </h2>
           <div className="flex gap-2">
-            <Button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer">
+            <Button
+              onClick={handleSaveLayout}
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer"
+            >
               Save in Layout
             </Button>
-            <Button className="px-4 py-2 bg-white text-blue-500  rounded hover:bg-gray-200 cursor-pointer border border-blue-500">
+            <Button
+              onClick={handleReset}
+              className="px-4 py-2 bg-white text-blue-500  rounded hover:bg-gray-200 cursor-pointer border border-blue-500"
+            >
               Reset
             </Button>
           </div>

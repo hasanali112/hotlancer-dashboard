@@ -166,6 +166,7 @@ const Banner = () => {
   // Handle saving banner configuration to Redux store
   const handleSaveBanner = () => {
     const bannerStyles = {
+      display,
       flexDirection,
       justifyContent,
       alignItems,
@@ -542,7 +543,8 @@ const Banner = () => {
               <Image
                 src={bannerConfig.imageUrl}
                 alt={bannerConfig.imageAlt}
-                fill
+                width={300}
+                height={200}
                 className="object-cover"
               />
             </div>

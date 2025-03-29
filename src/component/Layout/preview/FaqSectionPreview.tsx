@@ -16,7 +16,7 @@ const FaqSectionPreview = ({ faqSection }: { faqSection: any }) => {
   return (
     <div
       className={`w-full rounded-lg ${
-        !faqSection || Object.keys(faqSection).length === 0 ? "" : "p-12 my-12"
+        !faqSection || Object.keys(faqSection).length === 0 ? "" : "p-12 "
       }`}
       style={{
         backgroundColor: faqSection.styles.bgColor,

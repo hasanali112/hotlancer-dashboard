@@ -58,6 +58,14 @@ const Preview = () => {
     }
   };
 
+  // Check if any component exists
+  const hasAnyComponent =
+    navComponent ||
+    bannerComponent ||
+    featuresComponent ||
+    descriptiveSection ||
+    parallaxSection;
+
   return (
     <div className="shadow-lg shadow-blue-200 rounded-lg w-full">
       <div className="bg-white p-6 mb-6">
@@ -79,7 +87,7 @@ const Preview = () => {
           </div>
         </div>
         <div className="border border-gray-200 rounded-md">
-          <div className="p-4 flex flex-col justify-center items-center min-h-32 bg-gray-100 rounded">
+          <div className="p-4 flex flex-col gap-10 justify-center items-center min-h-32 bg-gray-100 rounded">
             {/* Navbar */}
             {navComponent && <NavPreview navComponent={navComponent} />}
             {bannerComponent && (
@@ -103,11 +111,14 @@ const Preview = () => {
               <FooterSectionPreview footerSection={footerSection} />
             )}
           </div>
-          <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
-            <h1 className="text-2xl font-semibold text-gray-700">
-              Page Content Area
-            </h1>
-          </div>
+          {/* Only show Page Content Area if no components exist */}
+          {!hasAnyComponent && (
+            <div className="p-8 flex justify-center items-center min-h-32 bg-gray-100 rounded">
+              <h1 className="text-2xl font-semibold text-gray-700">
+                Page Content Area
+              </h1>
+            </div>
+          )}
         </div>
       </div>
 

@@ -17,7 +17,18 @@ const layoutApi = baseApi.injectEndpoints({
       }),
       providesTags: ["component"],
     }),
+    deleteLayout: builder.mutation({
+      query: (id) => ({
+        url: `/delete-component/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["component"],
+    }),
   }),
 });
 
-export const { useCreateLayoutMutation, useGetAllLayoutQuery } = layoutApi;
+export const {
+  useCreateLayoutMutation,
+  useGetAllLayoutQuery,
+  useDeleteLayoutMutation,
+} = layoutApi;
