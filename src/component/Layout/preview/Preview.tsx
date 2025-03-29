@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useAppSelector } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import React, { useState } from "react";
 import NavPreview from "./NavPreview";
 import BanPreview from "./BanPreview";
@@ -21,6 +21,7 @@ import ParallaxSectionPreview from "./ParallaxSectionPreview";
 import FormSectionPreview from "./FormSectionPreview";
 import FaqSectionPreview from "./FaqSectionPreview";
 import FooterSectionPreview from "./FooterSectionPreview";
+import { resetFull } from "@/redux/features/layout/layoutSlice";
 
 const Preview = () => {
   const [layoutNames, setLayoutNames] = useState("");
@@ -35,6 +36,7 @@ const Preview = () => {
     footerSection,
   } = useAppSelector((state) => state.layout as any);
   const [createLayout, { isLoading }] = useCreateLayoutMutation();
+  const dispatch = useAppDispatch();
 
   const handleComponent = async () => {
     const data = {
@@ -124,9 +126,12 @@ const Preview = () => {
 
       {/* Action Buttons */}
       <div className="flex justify-end space-x-4 p-6 bg-gray-50 border-t border-gray-200">
-        <button className="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-md transition duration-200">
+        <Button
+          onClick={() => dispatch(resetFull())}
+          className="bg-white text-gray-700 hover:bg-gray-100 border border-gray-500 rounded"
+        >
           Reset
-        </button>
+        </Button>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
