@@ -72,6 +72,16 @@ const layoutSlice = createSlice({
     resetFooterSection: (state) => {
       state.footerSection = initialState.footerSection;
     },
+    resetFull: (state) => {
+      state.bannerComponent = {};
+      state.navComponent = {};
+      state.featuresComponent = [];
+      state.descriptiveSection = initialState.descriptiveSection;
+      state.parallaxSection = initialState.parallaxSection;
+      state.formSection = initialState.formSection;
+      state.faqSection = initialState.faqSection;
+      state.footerSection = initialState.footerSection;
+    },
   },
 });
 
@@ -92,5 +102,6 @@ export const {
   resetFaqSection,
   setFooterSection,
   resetFooterSection,
+  resetFull,
 } = layoutSlice.actions;
 export default layoutSlice.reducer;
