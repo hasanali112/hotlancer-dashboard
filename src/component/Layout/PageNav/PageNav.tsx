@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -12,51 +13,46 @@ const PageNav = () => {
 
   // Navbar configuration
   const [navConfig, setNavConfig] = useState({
-    brand: "Brand Name",
-    brandType: "text", // 'text' or 'image'
-    brandImage: "", // Use an empty string instead of null
+    brand: "EAF CLOPPING",
+    brandType: "text",
+    brandImage: "",
     items: [
-      { label: "Home", url: "/" },
-      { label: "About", url: "/about" },
-      { label: "Services", url: "/services" },
-      { label: "Contact", url: "/contact" },
+      { label: "SERVICES", url: "/services" },
+      { label: "PORTFOLIO", url: "/portfolio" },
+      { label: "PRICE", url: "/price" },
     ],
-    // Mobile menu configuration
-    mobileMenuIcon: "☰", // Default hamburger icon
+    buttons: [
+      { label: "FREE TRIAL", url: "/free-trial", variant: "outline" },
+      { label: "GET QUOTE", url: "/get-quote", variant: "solid" },
+    ],
+    mobileMenuIcon: "☰",
     mobileMenuOpen: false,
-    // Layout classes
-    baseClasses: "w-full px-4 sm:px-6", // Base classes for all screens
-    display: "flex", // flex
-    flexDirection: "flex-row", // flex-row, flex-col for mobile
-    justifyContent: "justify-between", // justify-start, justify-center, etc.
-    alignItems: "items-center", // items-start, items-center, etc.
-    gap: "gap-4", // gap-2, gap-4, etc.
-    padding: "py-4", // py-2, py-4, etc.
-    // Mobile specific classes
-    mobileFlexDirection: "flex-col", // flex direction for mobile
-    mobileJustifyContent: "justify-start", // justify content for mobile
-    mobileAlignItems: "items-start", // align items for mobile
-    mobileGap: "gap-2", // gap for mobile
-    mobilePadding: "py-2", // padding for mobile
-    // Text styles
-    textSize: "text-base", // text size for nav items
-    textHover: "hover:text-blue-500", // hover effect
-    textTransition: "transition-colors duration-200", // transition effect
-    // Brand styles
-    brandTextSize: "text-xl", // brand text size
-    brandWeight: "font-bold", // brand font weight
-    // Mobile menu styles
-    mobileMenuClasses: "sm:hidden", // classes for mobile menu button
-    navItemContainerClasses: "hidden sm:flex", // classes for nav items container (hidden on mobile)
-    mobileNavItemContainerClasses: "flex flex-col w-full", // classes for mobile nav items
+    baseClasses: "w-full px-4 sm:px-6",
+    display: "flex",
+    flexDirection: "flex-row",
+    justifyContent: "justify-between",
+    alignItems: "items-center",
+    gap: "gap-4",
+    padding: "py-4",
+    mobileFlexDirection: "flex-col",
+    mobileJustifyContent: "justify-start",
+    mobileAlignItems: "items-start",
+    mobileGap: "gap-2",
+    mobilePadding: "py-2",
+    textSize: "text-base",
+    textHover: "hover:text-blue-500",
+    textTransition: "transition-colors duration-200",
+    brandTextSize: "text-xl",
+    brandWeight: "font-bold",
+    mobileMenuClasses: "sm:hidden",
+    navItemContainerClasses: "hidden sm:flex",
+    mobileNavItemContainerClasses: "flex flex-col w-full",
   });
 
-  // Navbar styling
   const [brandText, setBrandText] = useState(navConfig.brand);
   const [navbarColor, setNavbarColor] = useState("#ffffff");
   const [navbarTextColor, setNavbarTextColor] = useState("#333333");
 
-  // Update brand in nav config when brandText changes
   const updateBrand = (newBrand: string) => {
     setBrandText(newBrand);
     setNavConfig((prevConfig) => ({
@@ -65,7 +61,6 @@ const PageNav = () => {
     }));
   };
 
-  // Handle brand type change (text or image)
   const handleBrandTypeChange = (type: "text" | "image") => {
     setNavConfig((prevConfig) => ({
       ...prevConfig,
@@ -73,7 +68,6 @@ const PageNav = () => {
     }));
   };
 
-  // Handle image upload
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -84,7 +78,6 @@ const PageNav = () => {
     }
   };
 
-  // Handle style change
   const handleStyleChange = (property: string, value: string) => {
     setNavConfig((prevConfig) => ({
       ...prevConfig,
@@ -92,13 +85,13 @@ const PageNav = () => {
     }));
   };
 
-  // Handle saving navbar configuration to Redux store
   const handleSaveNav = () => {
     const config = {
       brand: brandText,
       brandType: navConfig.brandType,
       brandImage: navConfig.brandImage,
       items: navConfig.items,
+      buttons: navConfig.buttons,
       mobileMenuIcon: navConfig.mobileMenuIcon,
       classes: {
         baseClasses: navConfig.baseClasses,
@@ -135,11 +128,9 @@ const PageNav = () => {
   };
 
   return (
-    <div className="w-full  rounded-lg">
-      {/* Configuration Panel */}
+    <div className="w-full rounded-lg">
       <div>
         <div className="flex flex-col space-y-6">
-          {/* Header with actions */}
           <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
             <div>
               <h2 className="text-2xl font-bold text-gray-800">Navbar</h2>
@@ -163,13 +154,11 @@ const PageNav = () => {
 
           <hr className="border-gray-200" />
 
-          {/* Brand Configuration */}
           <div className="space-y-6">
             <h3 className="text-lg font-semibold text-gray-800">
               Brand Configuration
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Brand Type Selection */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">
                   Brand Type
@@ -200,7 +189,6 @@ const PageNav = () => {
                 </div>
               </div>
 
-              {/* Brand Content */}
               {navConfig.brandType === "text" ? (
                 <div className="space-y-4">
                   <div>
@@ -291,7 +279,6 @@ const PageNav = () => {
 
           <hr className="border-gray-200" />
 
-          {/* Color Configuration */}
           <div className="space-y-6">
             <h3 className="text-lg font-semibold text-gray-800">
               Color Scheme
@@ -344,13 +331,11 @@ const PageNav = () => {
 
           <hr className="border-gray-200" />
 
-          {/* Layout Configuration */}
           <div className="space-y-6">
             <h3 className="text-lg font-semibold text-gray-800">
               Layout Settings
             </h3>
 
-            {/* Desktop Layout */}
             <div className="space-y-4">
               <h4 className="text-md font-medium text-gray-700">
                 Desktop Layout
@@ -435,7 +420,6 @@ const PageNav = () => {
               </div>
             </div>
 
-            {/* Mobile Layout */}
             <div className="space-y-4">
               <h4 className="text-md font-medium text-gray-700">
                 Mobile Layout
@@ -525,7 +509,6 @@ const PageNav = () => {
 
           <hr className="border-gray-200" />
 
-          {/* Text Styles */}
           <div className="space-y-6">
             <h3 className="text-lg font-semibold text-gray-800">Text Styles</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -573,7 +556,6 @@ const PageNav = () => {
 
           <hr className="border-gray-200" />
 
-          {/* Container Classes */}
           <div className="space-y-6">
             <h3 className="text-lg font-semibold text-gray-800">
               Container Classes
@@ -623,10 +605,73 @@ const PageNav = () => {
               </div>
             </div>
           </div>
+
+          <hr className="border-gray-200" />
+
+          <div className="space-y-6">
+            <h3 className="text-lg font-semibold text-gray-800">
+              Buttons Configuration
+            </h3>
+            {navConfig.buttons?.map((button: any, index: number) => (
+              <div key={index} className="space-y-4 p-4 border rounded-lg">
+                <h4 className="text-md font-medium text-gray-700">
+                  Button {index + 1}
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Button Text
+                    </label>
+                    <input
+                      type="text"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border"
+                      value={button.label}
+                      onChange={(e) => {
+                        const newButtons = [...navConfig.buttons];
+                        newButtons[index].label = e.target.value;
+                        setNavConfig({ ...navConfig, buttons: newButtons });
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Button URL
+                    </label>
+                    <input
+                      type="text"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border"
+                      value={button.url}
+                      onChange={(e) => {
+                        const newButtons = [...navConfig.buttons];
+                        newButtons[index].url = e.target.value;
+                        setNavConfig({ ...navConfig, buttons: newButtons });
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Button Variant
+                    </label>
+                    <select
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border"
+                      value={button.variant}
+                      onChange={(e) => {
+                        const newButtons = [...navConfig.buttons];
+                        newButtons[index].variant = e.target.value;
+                        setNavConfig({ ...navConfig, buttons: newButtons });
+                      }}
+                    >
+                      <option value="solid">Solid</option>
+                      <option value="outline">Outline</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Preview Section */}
       <PagNavPreview
         navConfig={navConfig}
         navbarColor={navbarColor}
