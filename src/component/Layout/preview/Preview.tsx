@@ -89,7 +89,7 @@ const Preview = () => {
           </div>
         </div>
         <div className="border border-gray-200 rounded-md">
-          <div className="p-4 flex flex-col gap-10 justify-center items-center min-h-32 bg-gray-100 rounded">
+          <div className="p-3 flex flex-col gap-10 justify-center items-center min-h-32 bg-gray-100 rounded">
             {/* Navbar */}
             {navComponent && <NavPreview navComponent={navComponent} />}
             {bannerComponent && (
