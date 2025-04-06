@@ -4,13 +4,16 @@ import React from "react";
 
 const NavPreview = ({ navComponent }: { navComponent: any }) => {
   return (
-    <div className="w-full">
+    <div
+      style={{
+        backgroundColor: navComponent.colors?.backgroundColor,
+        color: navComponent.colors?.textColor,
+      }}
+      className={`w-full ${navComponent.classes?.baseClasses}`}
+    >
+      {/* Desktop Navigation */}
       <nav
-        style={{
-          backgroundColor: navComponent.colors?.backgroundColor,
-          color: navComponent.colors?.textColor,
-        }}
-        className={`flex w-full ${navComponent.navStyles?.flexDirection} ${navComponent.navStyles?.justifyContent} ${navComponent.navStyles?.alignItems} ${navComponent.navStyles?.gap} p-4 rounded-md`}
+        className={`${navComponent.classes?.display} ${navComponent.classes?.flexDirection} ${navComponent.classes?.justifyContent} ${navComponent.classes?.alignItems} ${navComponent.classes?.gap} ${navComponent.classes?.padding} w-full`}
       >
         {/* Brand (Image or Text) */}
         {navComponent.brandType === "image" ? (
@@ -26,23 +29,60 @@ const NavPreview = ({ navComponent }: { navComponent: any }) => {
             <p className="text-red-500">No image uploaded</p>
           )
         ) : (
-          <div className="text-lg font-semibold">{navComponent.brand}</div>
+          <div
+            className={`${navComponent.classes?.brandTextSize} ${navComponent.classes?.brandWeight}`}
+          >
+            {navComponent.brand}
+          </div>
         )}
 
-        {/* Nav Items */}
-        <ul className={`flex ${navComponent.navStyles?.gap}`}>
+        {/* Desktop Nav Items */}
+        <ul
+          className={`${navComponent.classes?.navItemContainerClasses} ${navComponent.classes?.display} ${navComponent.classes?.flexDirection} ${navComponent.classes?.gap}`}
+        >
           {navComponent.items?.map((item: any, index: any) => (
             <li key={index}>
               <a
                 href={item.url}
-                className="hover:text-blue-600 transition duration-200"
+                className={`${navComponent.classes?.textSize} ${navComponent.classes?.textHover} ${navComponent.classes?.textTransition}`}
               >
                 {item.label}
               </a>
             </li>
           ))}
         </ul>
+
+        {/* Mobile Menu Button */}
+        <button className={navComponent.classes?.mobileMenuClasses}>
+          {navComponent.mobileMenuIcon || "☰"}
+        </button>
       </nav>
+
+      {/* Mobile Navigation (hidden by default) */}
+      <div className={`${navComponent.classes?.mobileMenuClasses} w-full`}>
+        <nav
+          style={{
+            backgroundColor: navComponent.colors?.backgroundColor,
+            color: navComponent.colors?.textColor,
+          }}
+          className={`${navComponent.classes?.display} ${navComponent.classes?.mobileFlexDirection} ${navComponent.classes?.mobileJustifyContent} ${navComponent.classes?.mobileAlignItems} ${navComponent.classes?.mobileGap} ${navComponent.classes?.mobilePadding} w-full`}
+        >
+          <ul
+            className={`${navComponent.classes?.mobileNavItemContainerClasses} ${navComponent.classes?.gap}`}
+          >
+            {navComponent.items?.map((item: any, index: any) => (
+              <li key={index}>
+                <a
+                  href={item.url}
+                  className={`${navComponent.classes?.textSize} ${navComponent.classes?.textHover} ${navComponent.classes?.textTransition}`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </div>
   );
 };

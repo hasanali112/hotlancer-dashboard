@@ -15,7 +15,7 @@ const PagNavPreview = ({ navConfig, navbarColor, navbarTextColor }: any) => {
 
         <div className="border border-gray-200 rounded-lg overflow-hidden">
           <nav
-            className={`${navConfig.baseClasses} ${navConfig.flexDirection} ${navConfig.justifyContent} ${navConfig.alignItems} ${navConfig.gap} ${navConfig.padding}`}
+            className={`${navConfig.baseClasses} ${navConfig.display} ${navConfig.flexDirection} ${navConfig.justifyContent} ${navConfig.alignItems} ${navConfig.gap} ${navConfig.padding}`}
             style={{ backgroundColor: navbarColor, color: navbarTextColor }}
           >
             {navConfig.brandType === "text" ? (

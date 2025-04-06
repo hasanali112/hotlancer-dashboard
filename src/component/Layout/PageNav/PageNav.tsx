@@ -26,6 +26,7 @@ const PageNav = () => {
     mobileMenuOpen: false,
     // Layout classes
     baseClasses: "w-full px-4 sm:px-6", // Base classes for all screens
+    display: "flex", // flex
     flexDirection: "flex-row", // flex-row, flex-col for mobile
     justifyContent: "justify-between", // justify-start, justify-center, etc.
     alignItems: "items-center", // items-start, items-center, etc.
@@ -101,6 +102,7 @@ const PageNav = () => {
       mobileMenuIcon: navConfig.mobileMenuIcon,
       classes: {
         baseClasses: navConfig.baseClasses,
+        display: navConfig.display,
         flexDirection: navConfig.flexDirection,
         justifyContent: navConfig.justifyContent,
         alignItems: navConfig.alignItems,
